@@ -14,9 +14,14 @@ type TTextType =
 type TTextProps = {
   children: ReactNode;
   textType?: TTextType;
+  className?: string;
 };
 
-export const Text: FC<TTextProps> = ({ children, textType = 'default' }) => {
+export const Text: FC<TTextProps> = ({
+  children,
+  className,
+  textType = 'default',
+}) => {
   const getTextTypeClass = () => {
     switch (textType) {
       case 'default':
@@ -38,5 +43,9 @@ export const Text: FC<TTextProps> = ({ children, textType = 'default' }) => {
     }
   };
 
-  return <p className={classNames('text', getTextTypeClass())}>{children}</p>;
+  return (
+    <p className={classNames('text', getTextTypeClass(), className)}>
+      {children}
+    </p>
+  );
 };

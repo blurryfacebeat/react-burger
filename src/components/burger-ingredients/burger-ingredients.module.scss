@@ -1,0 +1,14 @@
+.burgerIngredients {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+}
+
+.ingredientsContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  gap: 40px;
+  max-height: 500px;
+}
