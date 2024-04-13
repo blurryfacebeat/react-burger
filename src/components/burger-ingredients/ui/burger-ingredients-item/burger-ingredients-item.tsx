@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import styles from './burger-ingredients-item.module.scss';
-import { Price } from '@/components/price/price.tsx';
-import { Text } from '@/components';
+import { Text, Price } from '@/components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 type TBurgerIngredientsItemProps = {
