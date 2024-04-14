@@ -1,4 +1,4 @@
-import { FC, ComponentType, ReactNode } from 'react';
+import { FC, ComponentType, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import styles from './navigation-link.module.scss';
 import { Text } from '@/components';
@@ -7,11 +7,10 @@ type TIconProps = {
   type: 'primary' | 'secondary';
 };
 
-type TNavigationLinkProps = {
+type TNavigationLinkProps = PropsWithChildren<{
   Icon: ComponentType<TIconProps>;
-  children: ReactNode;
   isActive?: boolean;
-};
+}>;
 
 export const NavigationLink: FC<TNavigationLinkProps> = ({
   isActive,

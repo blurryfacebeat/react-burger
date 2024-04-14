@@ -1,14 +1,13 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import styles from './burger-ingredients-category.module.scss';
 import { Text } from '@/components';
 import { INGREDIENTS_MAP } from '@/utils';
 import classNames from 'classnames';
 
-type TBurgerIngredientsCategoryProps = {
-  children: ReactNode;
+type TBurgerIngredientsCategoryProps = PropsWithChildren<{
   category: string;
   anchorTag?: string;
-};
+}>;
 
 export const BurgerIngredientsCategory: FC<TBurgerIngredientsCategoryProps> = ({
   children,

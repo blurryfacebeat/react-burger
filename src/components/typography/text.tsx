@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
 type TTextType =
@@ -11,11 +11,10 @@ type TTextType =
   | 'digitsMedium'
   | 'digitsLarge';
 
-type TTextProps = {
-  children: ReactNode;
+type TTextProps = PropsWithChildren<{
   textType?: TTextType;
   className?: string;
-};
+}>;
 
 export const Text: FC<TTextProps> = ({
   children,
