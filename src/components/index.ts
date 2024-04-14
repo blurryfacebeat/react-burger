@@ -4,3 +4,4 @@ export * from './navigation-link';
 export * from './burger-ingredients';
 export * from './tabs';
 export * from './price';
+export * from './burger-constructor';
