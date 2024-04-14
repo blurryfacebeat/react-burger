@@ -1,1 +1,1 @@
-export { MainLayout } from './main-layout.tsx';
+export * from './main-layout';
