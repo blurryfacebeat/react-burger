@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Tabs, Text } from '@/components';
+import { CustomScrollbar, Tabs, Text } from '@/components';
 import styles from './burger-ingredients.module.scss';
 import classNames from 'classnames';
 import { TDataItem } from '@/utils';
@@ -45,25 +45,27 @@ export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
         anchorTag={anchorTag}
         className="mb-10"
       />
-      <div className={styles.ingredientsContainer}>
-        {Object.entries(mappedData).map(([key, value]) => (
-          <BurgerIngredientsCategory
-            key={key}
-            category={key}
-            anchorTag={anchorTag}
-          >
-            {value.map((item) => (
-              <BurgerIngredientsItem
-                key={item._id}
-                price={item.price}
-                name={item.name}
-                image={item.image}
-                count={1}
-              />
-            ))}
-          </BurgerIngredientsCategory>
-        ))}
-      </div>
+      <CustomScrollbar className={styles.scrollBarContainer}>
+        <div className={styles.ingredientsContainer}>
+          {Object.entries(mappedData).map(([key, value]) => (
+            <BurgerIngredientsCategory
+              key={key}
+              category={key}
+              anchorTag={anchorTag}
+            >
+              {value.map((item) => (
+                <BurgerIngredientsItem
+                  key={item._id}
+                  price={item.price}
+                  name={item.name}
+                  image={item.image}
+                  count={1}
+                />
+              ))}
+            </BurgerIngredientsCategory>
+          ))}
+        </div>
+      </CustomScrollbar>
     </div>
   );
 };

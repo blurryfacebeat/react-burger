@@ -3,6 +3,7 @@ import styles from './burger-constructor.module.scss';
 import classNames from 'classnames';
 import { BurgerConstructorItem } from '@/components/burger-constructor/ui';
 import { TDataItem } from '@/utils';
+import { CustomScrollbar } from '@/components';
 
 type TBurgerConstructorProps = {
   data: TDataItem[];
@@ -13,7 +14,7 @@ export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
   const ingredients = data.filter((item) => item.type !== 'bun')!;
 
   return (
-    <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4 pr-4')}>
+    <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
       <BurgerConstructorItem
         text={`${bun.name} (верх)`}
         thumbnail={bun.image}
@@ -21,17 +22,19 @@ export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
         type="top"
         isLocked
       />
-      <ul className={styles.burgerConstructorContainer}>
-        {ingredients.map((item) => (
-          <BurgerConstructorItem
-            key={item._id}
-            text={item.name}
-            thumbnail={item.image}
-            price={item.price}
-            isDraggable
-          />
-        ))}
-      </ul>
+      <CustomScrollbar className={styles.scrollBarContainer}>
+        <ul className={styles.burgerConstructorContainer}>
+          {ingredients.map((item) => (
+            <BurgerConstructorItem
+              key={item._id}
+              text={item.name}
+              thumbnail={item.image}
+              price={item.price}
+              isDraggable
+            />
+          ))}
+        </ul>
+      </CustomScrollbar>
       <BurgerConstructorItem
         text={`${bun.name} (низ)`}
         thumbnail={bun.image}

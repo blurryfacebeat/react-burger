@@ -5,3 +5,4 @@ export * from './burger-ingredients';
 export * from './tabs';
 export * from './price';
 export * from './burger-constructor';
+export * from './custom-scrollbar';

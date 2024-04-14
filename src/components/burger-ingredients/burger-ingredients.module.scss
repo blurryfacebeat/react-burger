@@ -5,11 +5,12 @@
   max-width: 600px;
 }
 
+.scrollBarContainer {
+  max-height: 500px;
+}
+
 .ingredientsContainer {
   display: flex;
   flex-direction: column;
-  overflow: auto;
-  overscroll-behavior: contain;
   gap: 40px;
-  max-height: 500px;
 }

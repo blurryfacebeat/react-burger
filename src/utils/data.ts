@@ -16,7 +16,7 @@ export const dataItemsConstructor: TDataItem[] = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9b5',
+    _id: '60666c42cc7b4102027a1a9b5',
     name: 'Говяжий метеорит (отбивная)',
     type: 'main',
     proteins: 800,
@@ -30,7 +30,7 @@ export const dataItemsConstructor: TDataItem[] = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9b6',
+    _id: '60666c42cc7b4100237a1a9b6',
     name: 'Биокотлета из марсианской Магнолии',
     type: 'main',
     proteins: 420,
@@ -44,7 +44,7 @@ export const dataItemsConstructor: TDataItem[] = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9bb',
+    _id: '60666c42cc7b4510027a1a9bb',
     name: 'Хрустящие минеральные кольца',
     type: 'main',
     proteins: 808,
@@ -60,7 +60,7 @@ export const dataItemsConstructor: TDataItem[] = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9ba',
+    _id: '60666c42cc7b4106027a1a9ba',
     name: 'Соус с шипами Антарианского плоскоходца',
     type: 'sauce',
     proteins: 101,
@@ -74,7 +74,7 @@ export const dataItemsConstructor: TDataItem[] = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9bb',
+    _id: '60666c42cc7b7410027a1a9bb',
     name: 'Хрустящие минеральные кольца',
     type: 'main',
     proteins: 808,
@@ -90,7 +90,7 @@ export const dataItemsConstructor: TDataItem[] = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9ba',
+    _id: '60666c42cc7b4180027a1a9ba',
     name: 'Соус с шипами Антарианского плоскоходца',
     type: 'sauce',
     proteins: 101,
@@ -104,7 +104,7 @@ export const dataItemsConstructor: TDataItem[] = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9bb',
+    _id: '60666c42cc7b4100227a1a9bb',
     name: 'Хрустящие минеральные кольца',
     type: 'main',
     proteins: 808,
@@ -120,7 +120,7 @@ export const dataItemsConstructor: TDataItem[] = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9ba',
+    _id: '60666c42cc7b4100237a1a9ba',
     name: 'Соус с шипами Антарианского плоскоходца',
     type: 'sauce',
     proteins: 101,
