@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { CustomScrollbar, Tabs, Text } from '@/components';
 import styles from './burger-ingredients.module.scss';
 import classNames from 'classnames';
-import { TDataItem } from '@/utils';
 import { useBurgerIngredientsTabs } from './hooks';
 import {
   BurgerIngredientsCategory,
   BurgerIngredientsItem,
 } from '@/components/burger-ingredients/ui';
+import { TDataItem } from '@/api';
 
 type TBurgerIngredientsProps = {
   data: TDataItem[];

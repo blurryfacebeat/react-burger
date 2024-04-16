@@ -5,8 +5,8 @@ import {
   BurgerConstructorItem,
   BurgerConstructorTotal,
 } from '@/components/burger-constructor/ui';
-import { TDataItem } from '@/utils';
 import { CustomScrollbar } from '@/components';
+import { TDataItem } from '@/api';
 
 type TBurgerConstructorProps = {
   data: TDataItem[];
@@ -15,6 +15,10 @@ type TBurgerConstructorProps = {
 export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
   const bun = data.find((item) => item.type === 'bun')!;
   const ingredients = data.filter((item) => item.type !== 'bun')!;
+
+  const total = data.reduce((acc, item) => {
+    return acc + item.price;
+  }, 0);
 
   return (
     <>
@@ -46,7 +50,7 @@ export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
           type="bottom"
           isLocked
         />
-        <BurgerConstructorTotal value={610} />
+        <BurgerConstructorTotal value={total} />
       </div>
     </>
   );

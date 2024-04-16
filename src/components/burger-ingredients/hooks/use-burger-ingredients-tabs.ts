@@ -1,6 +1,7 @@
-import { INGREDIENTS_MAP, TDataItem } from '@/utils';
+import { INGREDIENTS_MAP } from '@/utils';
 import { useState } from 'react';
 import { TTabItem } from '@/components/tabs/tabs.tsx';
+import { TDataItem } from '@/api';
 
 type TUseBurgerIngredientsTabsProps = {
   data: Record<string, TDataItem[]>;
