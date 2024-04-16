@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { AppHeader } from '@/components/app-header';
+import { AppHeader } from '@/components';
 
 type TMainLayoutProps = {
   children: ReactNode;

@@ -6,3 +6,6 @@ export * from './tabs';
 export * from './price';
 export * from './burger-constructor';
 export * from './custom-scrollbar';
+export * from './loader';
+export * from './app-header';
+export * from './placeholders';
