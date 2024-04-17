@@ -1,37 +1,40 @@
-import { FC } from 'react';
-import { CustomScrollbar, Tabs, Text } from '@/components';
+import { FC, useMemo } from 'react';
+import { Tabs, Text } from '@/components';
 import styles from './burger-ingredients.module.scss';
 import classNames from 'classnames';
-import { useBurgerIngredientsTabs } from './hooks';
-import {
-  BurgerIngredientsCategory,
-  BurgerIngredientsItem,
-} from '@/components/burger-ingredients/ui';
+import { useBurgerIngredientsTabs, useBurgerIngredientsModal } from './hooks';
+import { BurgerIngredientsModal, BurgerIngredientsItems } from './ui';
 import { TDataItem } from '@/api';
+import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
 
 type TBurgerIngredientsProps = {
   data: TDataItem[];
 };
 
-const anchorTag = 'ingredients';
-
 export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
-  const mappedData = data.reduce(
-    (acc, item) => {
-      if (!acc[item.type]) {
-        acc[item.type] = [];
-      }
+  const mappedData = useMemo(
+    () =>
+      data.reduce(
+        (acc, item) => {
+          if (!acc[item.type]) {
+            acc[item.type] = [];
+          }
 
-      acc[item.type].push(item);
+          acc[item.type].push(item);
 
-      return acc;
-    },
-    {} as Record<string, TDataItem[]>,
+          return acc;
+        },
+        {} as Record<string, TDataItem[]>,
+      ),
+    [data],
   );
 
   const { tabs, currentTab, handleSetCurrentTab } = useBurgerIngredientsTabs({
     data: mappedData,
   });
+
+  const { isModalOpen, currentItem, handleModalClose, handleItemClick } =
+    useBurgerIngredientsModal({ data });
 
   return (
     <div className={classNames(styles.burgerIngredients, 'mt-10')}>
@@ -42,30 +45,15 @@ export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
         current={currentTab}
         tabs={tabs}
         onSetCurrent={handleSetCurrentTab}
-        anchorTag={anchorTag}
+        anchorTag={BURGER_INGREDIENTS_ANCHOR_TAG}
         className="mb-10"
       />
-      <CustomScrollbar className={styles.scrollBarContainer}>
-        <div className={styles.ingredientsContainer}>
-          {Object.entries(mappedData).map(([key, value]) => (
-            <BurgerIngredientsCategory
-              key={key}
-              category={key}
-              anchorTag={anchorTag}
-            >
-              {value.map((item) => (
-                <BurgerIngredientsItem
-                  key={item._id}
-                  price={item.price}
-                  name={item.name}
-                  image={item.image}
-                  count={1}
-                />
-              ))}
-            </BurgerIngredientsCategory>
-          ))}
-        </div>
-      </CustomScrollbar>
+      <BurgerIngredientsItems data={mappedData} onItemClick={handleItemClick} />
+      <BurgerIngredientsModal
+        isOpen={isModalOpen}
+        item={currentItem.current}
+        onClose={handleModalClose}
+      />
     </div>
   );
 };

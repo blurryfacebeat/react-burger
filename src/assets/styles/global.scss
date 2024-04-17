@@ -11,8 +11,7 @@
 html,
 body {
   max-width: 100dvw;
-  min-height: 100dvh;
-  overflow-x: hidden;
+  max-height: 100dvh;
   padding-bottom: 24px;
 
   background-color: var(--interface-bg);

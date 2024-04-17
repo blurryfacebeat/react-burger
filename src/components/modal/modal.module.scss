@@ -1,0 +1,19 @@
+.modal {
+  background-color: var(--interface-modal-bg);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-end;
+  width: 100%;
+}
+
+.closeIcon {
+  cursor: pointer;
+  height: 24px
+}

@@ -9,3 +9,4 @@ export * from './custom-scrollbar';
 export * from './loader';
 export * from './app-header';
 export * from './placeholders';
+export * from './modal';

@@ -7,6 +7,7 @@ type TBurgerIngredientsItemProps = {
   image: string;
   name: string;
   price: number;
+  onClick: () => void;
   count?: number;
 };
 
@@ -15,9 +16,10 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
   price,
   name,
   count,
+  onClick,
 }) => {
   return (
-    <li className={styles.burgerIngredientsItem}>
+    <li className={styles.burgerIngredientsItem} onClick={onClick}>
       {count && <Counter count={count} size="default" />}
       <img src={image} alt="burger ingredient" />
       <Price>{price}</Price>
