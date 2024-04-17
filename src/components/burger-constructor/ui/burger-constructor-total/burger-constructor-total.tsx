@@ -9,10 +9,12 @@ import {
 
 type TBurgerConstructorTotalProps = {
   value: number;
+  onClick: () => void;
 };
 
 export const BurgerConstructorTotal: FC<TBurgerConstructorTotalProps> = ({
   value,
+  onClick,
 }) => {
   return (
     <div className={classNames(styles.burgerConstructorTotal, 'pt-6')}>
@@ -22,7 +24,7 @@ export const BurgerConstructorTotal: FC<TBurgerConstructorTotalProps> = ({
         </div>
         <Text textType="digitsMedium">{value}</Text>
       </div>
-      <Button type="primary" size="large" htmlType="submit">
+      <Button type="primary" size="large" htmlType="submit" onClick={onClick}>
         Оформить заказ
       </Button>
     </div>

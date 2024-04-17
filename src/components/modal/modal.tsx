@@ -25,6 +25,10 @@ export const Modal: FC<TModalProps> = ({
     }
   };
 
+  const handleModalClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+  };
+
   useEffect(() => {
     document.documentElement.addEventListener('keydown', handleKeydown);
     document.body.style.overflow = 'hidden';
@@ -34,10 +38,6 @@ export const Modal: FC<TModalProps> = ({
       document.body.style.overflow = 'auto';
     };
   });
-
-  const handleModalClick = (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-  };
 
   return (
     <>

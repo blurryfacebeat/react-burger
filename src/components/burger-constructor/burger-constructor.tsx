@@ -1,11 +1,12 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import styles from './burger-constructor.module.scss';
 import classNames from 'classnames';
 import {
   BurgerConstructorItem,
   BurgerConstructorTotal,
+  BurgerConstructorModal,
 } from '@/components/burger-constructor/ui';
-import { CustomScrollbar } from '@/components';
+import { CustomScrollbar, useModal } from '@/components';
 import { TDataItem } from '@/api';
 
 type TBurgerConstructorProps = {
@@ -13,12 +14,18 @@ type TBurgerConstructorProps = {
 };
 
 export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
+  const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
+
   const bun = data.find((item) => item.type === 'bun')!;
   const ingredients = data.filter((item) => item.type !== 'bun')!;
 
-  const total = data.reduce((acc, item) => {
-    return acc + item.price;
-  }, 0);
+  const total = useMemo(
+    () =>
+      data.reduce((acc, item) => {
+        return acc + item.price;
+      }, 0),
+    [data],
+  );
 
   return (
     <>
@@ -50,7 +57,11 @@ export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
           type="bottom"
           isLocked
         />
-        <BurgerConstructorTotal value={total} />
+        <BurgerConstructorTotal value={total} onClick={handleModalOpen} />
+        <BurgerConstructorModal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+        />
       </div>
     </>
   );

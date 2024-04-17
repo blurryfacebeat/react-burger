@@ -3,17 +3,21 @@
   border-radius: 40px;
   display: flex;
   flex-direction: column;
+  max-height: 90dvh;
+  overflow: auto;
+  scrollbar-width: none;
 }
 
 .modalHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  align-self: flex-end;
   width: 100%;
 }
 
 .closeIcon {
+  margin-left: auto;
+  display: block;
   cursor: pointer;
   height: 24px
 }

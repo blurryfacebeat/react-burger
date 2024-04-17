@@ -18,7 +18,7 @@ export const ErrorPlaceholder: FC<TErrorPlaceholderProps> = ({ text }) => {
       <Button
         type="primary"
         size="large"
-        htmlType="submit"
+        htmlType="button"
         onClick={handleClick}
       >
         Обновить страницу
