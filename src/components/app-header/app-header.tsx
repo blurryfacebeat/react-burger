@@ -14,7 +14,9 @@ export const AppHeader: FC = () => {
       <div className={styles.headerContainer}>
         <AppHeaderNavigation />
         <Logo />
-        <NavigationLink Icon={ProfileIcon}>Личный кабинет</NavigationLink>
+        <span className={styles.profileLink}>
+          <NavigationLink Icon={ProfileIcon}>Личный кабинет</NavigationLink>
+        </span>
       </div>
     </header>
   );

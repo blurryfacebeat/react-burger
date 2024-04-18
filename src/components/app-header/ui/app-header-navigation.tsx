@@ -8,7 +8,7 @@ import styles from './app-header-navigation.module.scss';
 
 export const AppHeaderNavigation: FC = () => {
   return (
-    <nav>
+    <nav className="mr-30">
       <ul>
         <li className={styles.headerNavigation}>
           <NavigationLink isActive Icon={BurgerIcon}>
