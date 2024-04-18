@@ -5,7 +5,7 @@ import { Text } from '@/components';
 export const Loader: FC = () => {
   return (
     <Text className={styles.loader} textType="large">
-      Loading...
+      Загрузка...
     </Text>
   );
 };
