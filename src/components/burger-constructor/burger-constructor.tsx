@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import {
   BurgerConstructorItem,
   BurgerConstructorTotal,
-  BurgerConstructorModal,
+  BurgerConstructorOrder,
 } from '@/components/burger-constructor/ui';
-import { CustomScrollbar, useModal } from '@/components';
+import { CustomScrollbar, Modal, useModal } from '@/components';
 import { TDataItem } from '@/api';
 
 type TBurgerConstructorProps = {
@@ -58,10 +58,14 @@ export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
           isLocked
         />
         <BurgerConstructorTotal value={total} onClick={handleModalOpen} />
-        <BurgerConstructorModal
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-        />
+        {isModalOpen && (
+          <Modal
+            className={classNames(styles.burgerConstructorModal, 'pt-15 pb-30')}
+            onClose={handleModalClose}
+          >
+            <BurgerConstructorOrder />
+          </Modal>
+        )}
       </div>
     </>
   );

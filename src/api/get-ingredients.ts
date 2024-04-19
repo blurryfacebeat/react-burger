@@ -1,4 +1,5 @@
 import { MAIN_URL } from '@/api/api.constants.ts';
+import { checkResponse } from '@/utils';
 
 export type TDataItem = {
   _id: string;
@@ -22,8 +23,10 @@ type TResponse = {
 
 export const getIngredients = async (): Promise<TDataItem[] | undefined> => {
   try {
-    const response: Response = await fetch(`${MAIN_URL}/api/ingredients`);
-    const { data }: TResponse = await response.json();
+    const response: TResponse = await fetch(`${MAIN_URL}/api/ingredients`).then(
+      checkResponse,
+    );
+    const { data } = response;
 
     return data;
   } catch (error) {

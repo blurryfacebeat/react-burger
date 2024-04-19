@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
-import { Tabs, Text } from '@/components';
+import { Modal, Tabs, Text } from '@/components';
 import styles from './burger-ingredients.module.scss';
 import classNames from 'classnames';
 import { useBurgerIngredientsTabs, useBurgerIngredientsModal } from './hooks';
-import { BurgerIngredientsModal, BurgerIngredientsItems } from './ui';
+import { BurgerIngredientsDetails, BurgerIngredientsItems } from './ui';
 import { TDataItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
 
@@ -49,11 +49,15 @@ export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
         className="mb-10"
       />
       <BurgerIngredientsItems data={mappedData} onItemClick={handleItemClick} />
-      <BurgerIngredientsModal
-        isOpen={isModalOpen}
-        item={currentItem.current}
-        onClose={handleModalClose}
-      />
+      {isModalOpen && (
+        <Modal
+          className={classNames(styles.burgerIngredientsModal, 'pb-15')}
+          title="Детали ингредиента"
+          onClose={handleModalClose}
+        >
+          <BurgerIngredientsDetails item={currentItem.current} />
+        </Modal>
+      )}
     </div>
   );
 };

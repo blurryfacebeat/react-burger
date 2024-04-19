@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { TDataItem } from '@/api';
-import styles from './burger-ingredients-modal-characteristics.module.scss';
+import styles from './burger-ingredients-details-characteristics.module.scss';
 import { Text } from '@/components';
 
 type TBurgerIngredientsItemsCharacteristicsProps = {
   item: TDataItem;
 };
 
-export const BurgerIngredientsModalCharacteristics: FC<
+export const BurgerIngredientsDetailsCharacteristics: FC<
   TBurgerIngredientsItemsCharacteristicsProps
 > = ({ item }) => {
   return (
