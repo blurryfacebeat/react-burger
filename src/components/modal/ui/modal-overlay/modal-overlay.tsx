@@ -6,6 +6,7 @@ type TModalOverlayProps = {
   onClose: () => void;
 };
 
+// TODO:  Сделать ModalOverlay не контейнером, а просто подложкой
 export const ModalOverlay: FC<TModalOverlayProps> = ({ children, onClose }) => {
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
