@@ -1,0 +1,21 @@
+.burgerConstructorTotal {
+  display: flex;
+  gap: 40px;
+  margin-left: auto;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.icon {
+  margin-top: 4px;
+
+  svg {
+    width: 36px;
+    height: 36px;
+  }
+}

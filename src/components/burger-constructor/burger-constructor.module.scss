@@ -1,0 +1,23 @@
+.burgerConstructor {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.scrollBarContainer {
+  max-height: 400px;
+}
+
+.burgerConstructorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-right: 16px;
+}
+
+.burgerConstructorModal {
+  width: 100%;
+  max-width: 720px;
+}

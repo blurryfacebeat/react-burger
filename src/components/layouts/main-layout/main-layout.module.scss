@@ -1,0 +1,4 @@
+.main {
+  height: calc(100dvh - var(--header-height));
+  overflow: auto;
+}

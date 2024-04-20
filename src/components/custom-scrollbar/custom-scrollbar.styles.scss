@@ -1,0 +1,11 @@
+.simplebar-scrollbar {
+  &::before {
+    background-color: var(--text-dark-grey);
+    width: 8px;
+    border-radius: 0;
+  }
+}
+
+.simplebar-track {
+  background-color: var(--interface-input);
+}
