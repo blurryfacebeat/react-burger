@@ -5,16 +5,18 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import classNames from 'classnames';
 import styles from './burger-constructor-item.module.scss';
+import { useDispatch } from 'react-redux';
+import { removeIngredientFromConstructor, TAppDispatch } from '@/store';
 
 type TBurgerConstructorItemProps = {
   text: string;
   thumbnail: string;
   price: number;
+  id: string;
   type?: 'top' | 'bottom';
   isLocked?: boolean;
   isDraggable?: boolean;
   className?: string;
-  handleClose?: () => void;
 };
 
 export const BurgerConstructorItem: FC<TBurgerConstructorItemProps> = ({
@@ -22,11 +24,17 @@ export const BurgerConstructorItem: FC<TBurgerConstructorItemProps> = ({
   thumbnail,
   price,
   type,
+  id,
   isLocked,
   isDraggable,
   className,
-  handleClose,
 }) => {
+  const dispatch = useDispatch<TAppDispatch>();
+
+  const handleClose = () => {
+    dispatch(removeIngredientFromConstructor(id));
+  };
+
   return (
     <li className={classNames(styles.burgerConstructorItem, className)}>
       <span

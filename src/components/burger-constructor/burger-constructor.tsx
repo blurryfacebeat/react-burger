@@ -30,6 +30,10 @@ export const BurgerConstructor: FC = () => {
   const total = useMemo(
     () =>
       burgerConstructor.reduce((acc, item) => {
+        if (item.type === 'bun') {
+          return acc + item.price * 2;
+        }
+
         return acc + item.price;
       }, 0),
     [burgerConstructor],
@@ -63,6 +67,7 @@ export const BurgerConstructor: FC = () => {
                 thumbnail={bun.image}
                 price={bun.price}
                 type="top"
+                id={bun.key}
                 isLocked
               />
             )}
@@ -71,10 +76,11 @@ export const BurgerConstructor: FC = () => {
                 <ul className={styles.burgerConstructorContainer}>
                   {ingredients.map((item) => (
                     <BurgerConstructorItem
-                      key={item._id}
+                      key={item.key}
                       text={item.name}
                       thumbnail={item.image}
                       price={item.price}
+                      id={item.key}
                       isDraggable
                     />
                   ))}
@@ -87,6 +93,7 @@ export const BurgerConstructor: FC = () => {
                 thumbnail={bun.image}
                 price={bun.price}
                 type="bottom"
+                id={bun.key}
                 isLocked
               />
             )}

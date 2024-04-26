@@ -28,6 +28,9 @@
   width: 100%;
   border-radius: 8px;
   @include default-transition();
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .dropContainerCanDrop {

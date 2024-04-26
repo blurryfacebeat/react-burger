@@ -29,10 +29,7 @@ export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
             {value.map((item) => (
               <BurgerIngredientsItem
                 key={item._id}
-                price={item.price}
-                name={item.name}
-                image={item.image}
-                id={item._id}
+                item={item}
                 onClick={() => onItemClick(item)}
               />
             ))}

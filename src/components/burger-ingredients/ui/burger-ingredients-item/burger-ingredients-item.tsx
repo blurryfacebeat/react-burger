@@ -8,27 +8,37 @@ import {
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
 import classNames from 'classnames';
+import { TIngredientItem } from '@/api';
+import { useDispatch } from 'react-redux';
+import { addIngredientToConstructor, TAppDispatch } from '@/store';
 
 type TBurgerIngredientsItemProps = {
-  image: string;
-  name: string;
-  price: number;
-  id: string;
+  item: TIngredientItem;
   onClick: () => void;
   count?: number;
 };
 
+type TDropResult = {
+  id: string;
+};
+
 export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
-  image,
-  price,
-  name,
-  id,
+  item,
   count,
   onClick,
 }) => {
+  const dispatch = useDispatch<TAppDispatch>();
+
   const [{ isDragging }, drag] = useDrag(() => ({
+    item,
     type: BURGER_INGREDIENT_DRAG_AND_DROP_NAME,
-    item: { name: id },
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult<TDropResult>();
+
+      if (item && dropResult) {
+        dispatch(addIngredientToConstructor(item));
+      }
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -44,9 +54,9 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
       onClick={onClick}
     >
       {count && <Counter count={count} size="default" />}
-      <img src={image} alt="burger ingredient" />
-      <Price>{price}</Price>
-      <Text>{name}</Text>
+      <img src={item.image} alt="burger ingredient" />
+      <Price>{item.price}</Price>
+      <Text>{item.name}</Text>
     </li>
   );
 };
