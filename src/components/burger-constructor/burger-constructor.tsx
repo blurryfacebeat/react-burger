@@ -5,10 +5,17 @@ import {
   BurgerConstructorItem,
   BurgerConstructorTotal,
   BurgerConstructorOrder,
-} from '@/components/burger-constructor/ui';
-import { CustomScrollbar, Modal, useModal } from '@/components';
+  BurgerConstructorEmpty,
+} from './ui';
+import {
+  BURGER_INGREDIENT_DRAG_AND_DROP_NAME,
+  CustomScrollbar,
+  Modal,
+  useModal,
+} from '@/components';
 import { useSelector } from 'react-redux';
 import { TRootState } from '@/store';
+import { useDrop } from 'react-dnd';
 
 export const BurgerConstructor: FC = () => {
   const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
@@ -28,56 +35,75 @@ export const BurgerConstructor: FC = () => {
     [burgerConstructor],
   );
 
+  const [{ canDrop, isOver }, drop] = useDrop(() => ({
+    accept: BURGER_INGREDIENT_DRAG_AND_DROP_NAME,
+    drop: () => ({
+      name: 'burgerConstructor',
+    }),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  }));
+
   return (
-    <>
-      {burgerConstructor.length && (
-        <>
-          {bun && (
-            <BurgerConstructorItem
-              text={`${bun.name} (верх)`}
-              thumbnail={bun.image}
-              price={bun.price}
-              type="top"
-              isLocked
-            />
-          )}
-          {ingredients.length && (
-            <CustomScrollbar className={styles.scrollBarContainer}>
-              <ul className={styles.burgerConstructorContainer}>
-                {ingredients.map((item) => (
-                  <BurgerConstructorItem
-                    key={item._id}
-                    text={item.name}
-                    thumbnail={item.image}
-                    price={item.price}
-                    isDraggable
-                  />
-                ))}
-              </ul>
-            </CustomScrollbar>
-          )}
-          {bun && (
-            <BurgerConstructorItem
-              text={`${bun.name} (низ)`}
-              thumbnail={bun.image}
-              price={bun.price}
-              type="bottom"
-              isLocked
-            />
-          )}
-        </>
-      )}
-      <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
-        <BurgerConstructorTotal value={total} onClick={handleModalOpen} />
-        {isModalOpen && (
-          <Modal
-            className={classNames(styles.burgerConstructorModal, 'pt-15 pb-30')}
-            onClose={handleModalClose}
-          >
-            <BurgerConstructorOrder />
-          </Modal>
+    <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
+      <div
+        ref={drop}
+        className={classNames(
+          styles.dropContainer,
+          canDrop && styles.dropContainerCanDrop,
+        )}
+      >
+        {burgerConstructor.length ? (
+          <>
+            {bun && (
+              <BurgerConstructorItem
+                text={`${bun.name} (верх)`}
+                thumbnail={bun.image}
+                price={bun.price}
+                type="top"
+                isLocked
+              />
+            )}
+            {ingredients.length && (
+              <CustomScrollbar className={styles.scrollBarContainer}>
+                <ul className={styles.burgerConstructorContainer}>
+                  {ingredients.map((item) => (
+                    <BurgerConstructorItem
+                      key={item._id}
+                      text={item.name}
+                      thumbnail={item.image}
+                      price={item.price}
+                      isDraggable
+                    />
+                  ))}
+                </ul>
+              </CustomScrollbar>
+            )}
+            {bun && (
+              <BurgerConstructorItem
+                text={`${bun.name} (низ)`}
+                thumbnail={bun.image}
+                price={bun.price}
+                type="bottom"
+                isLocked
+              />
+            )}
+          </>
+        ) : (
+          <BurgerConstructorEmpty isDroppedItemOver={isOver} />
         )}
       </div>
-    </>
+      <BurgerConstructorTotal value={total} onClick={handleModalOpen} />
+      {isModalOpen && (
+        <Modal
+          className={classNames(styles.burgerConstructorModal, 'pt-15 pb-30')}
+          onClose={handleModalClose}
+        >
+          <BurgerConstructorOrder />
+        </Modal>
+      )}
+    </div>
   );
 };

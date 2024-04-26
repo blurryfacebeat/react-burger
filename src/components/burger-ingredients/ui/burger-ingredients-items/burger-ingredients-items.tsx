@@ -32,6 +32,7 @@ export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
                 price={item.price}
                 name={item.name}
                 image={item.image}
+                id={item._id}
                 onClick={() => onItemClick(item)}
               />
             ))}
