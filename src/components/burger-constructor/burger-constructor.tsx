@@ -71,7 +71,7 @@ export const BurgerConstructor: FC = () => {
                 isLocked
               />
             )}
-            {ingredients.length && (
+            {!!ingredients.length && (
               <CustomScrollbar className={styles.scrollBarContainer}>
                 <ul className={styles.burgerConstructorContainer}>
                   {ingredients.map((item) => (
@@ -87,7 +87,7 @@ export const BurgerConstructor: FC = () => {
                 </ul>
               </CustomScrollbar>
             )}
-            {bun && (
+            {!!bun && (
               <BurgerConstructorItem
                 text={`${bun.name} (низ)`}
                 thumbnail={bun.image}

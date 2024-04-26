@@ -7,6 +7,8 @@ import {
 import { TIngredientItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
 import styles from './burger-ingredients-items.module.scss';
+import { useSelector } from 'react-redux';
+import { TRootState } from '@/store';
 
 type TBurgerIngredientsItemsProps = {
   data: Record<string, TIngredientItem[]>;
@@ -17,6 +19,10 @@ export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
   data,
   onItemClick,
 }) => {
+  const burgerConstructorCounts = useSelector(
+    (state: TRootState) => state.burgerConstructor.counts,
+  );
+
   return (
     <CustomScrollbar className={styles.scrollBarContainer}>
       <div className={styles.ingredientsContainer}>
@@ -30,6 +36,7 @@ export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
               <BurgerIngredientsItem
                 key={item._id}
                 item={item}
+                count={burgerConstructorCounts[item._id]}
                 onClick={() => onItemClick(item)}
               />
             ))}

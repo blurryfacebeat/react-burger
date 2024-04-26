@@ -14,8 +14,8 @@ import { addIngredientToConstructor, TAppDispatch } from '@/store';
 
 type TBurgerIngredientsItemProps = {
   item: TIngredientItem;
-  onClick: () => void;
   count?: number;
+  onClick: () => void;
 };
 
 type TDropResult = {
