@@ -10,7 +10,7 @@ import styles from './burger-ingredients-items.module.scss';
 
 type TBurgerIngredientsItemsProps = {
   data: Record<string, TIngredientItem[]>;
-  onItemClick: (itemId: string) => void;
+  onItemClick: (item: TIngredientItem) => void;
 };
 
 export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
@@ -32,7 +32,7 @@ export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
                 price={item.price}
                 name={item.name}
                 image={item.image}
-                onClick={() => onItemClick(item._id)}
+                onClick={() => onItemClick(item)}
               />
             ))}
           </BurgerIngredientsCategory>

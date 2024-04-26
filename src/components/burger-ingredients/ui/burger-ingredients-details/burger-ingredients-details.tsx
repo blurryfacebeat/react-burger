@@ -2,16 +2,15 @@ import { FC } from 'react';
 import { Text } from '@/components';
 import styles from './burger-ingredients-details.module.scss';
 import classNames from 'classnames';
-import { TIngredientItem } from '@/api';
 import { BurgerIngredientsDetailsCharacteristics } from './ui';
+import { useSelector } from 'react-redux';
+import { TRootState } from '@/store';
 
-type TBurgerIngredientsModalProps = {
-  item: TIngredientItem | null;
-};
+export const BurgerIngredientsDetails: FC = () => {
+  const item = useSelector(
+    (state: TRootState) => state.selectedIngredient.selectedIngredient,
+  );
 
-export const BurgerIngredientsDetails: FC<TBurgerIngredientsModalProps> = ({
-  item,
-}) => {
   return (
     <>
       {item && (

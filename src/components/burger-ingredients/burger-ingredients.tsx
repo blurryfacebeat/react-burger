@@ -33,8 +33,8 @@ export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
     data: mappedData,
   });
 
-  const { isModalOpen, currentItem, handleModalClose, handleItemClick } =
-    useBurgerIngredientsModal({ data });
+  const { isModalOpen, handleModalClose, handleItemClick } =
+    useBurgerIngredientsModal();
 
   return (
     <div className={classNames(styles.burgerIngredients, 'mt-10')}>
@@ -55,7 +55,7 @@ export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
           title="Детали ингредиента"
           onClose={handleModalClose}
         >
-          <BurgerIngredientsDetails item={currentItem.current} />
+          <BurgerIngredientsDetails />
         </Modal>
       )}
     </div>

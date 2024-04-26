@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { ingredientsReducer } from '@/store/reducers';
+import {
+  ingredientsReducer,
+  selectedIngredientReducer,
+} from '@/store/reducers';
 
 export const store = configureStore({
   reducer: {
     ingredients: ingredientsReducer,
+    selectedIngredient: selectedIngredientReducer,
   },
   devTools: true,
 });

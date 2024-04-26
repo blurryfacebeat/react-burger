@@ -1,31 +1,26 @@
 import { useModal } from '@/components';
-import { useRef } from 'react';
 import { TIngredientItem } from '@/api';
+import { useDispatch } from 'react-redux';
+import { setSelectedIngredient, TAppDispatch } from '@/store';
 
-type TUseBurgerIngredientsModalProps = {
-  data: TIngredientItem[];
-};
+export const useBurgerIngredientsModal = () => {
+  const dispatch = useDispatch<TAppDispatch>();
 
-export const useBurgerIngredientsModal = ({
-  data,
-}: TUseBurgerIngredientsModalProps) => {
   const {
     isModalOpen,
     handleModalClose: handleModalCloseFromHook,
     handleModalOpen,
   } = useModal();
 
-  const currentItem = useRef<TIngredientItem | null>(null);
-
-  const handleItemClick = (itemId: string) => {
+  const handleItemClick = (item: TIngredientItem) => {
+    dispatch(setSelectedIngredient(item));
     handleModalOpen();
-    currentItem.current = data.find((item) => item._id === itemId) || null;
   };
 
   const handleModalClose = () => {
+    dispatch(setSelectedIngredient(null));
     handleModalCloseFromHook();
-    currentItem.current = null;
   };
 
-  return { isModalOpen, currentItem, handleItemClick, handleModalClose };
+  return { isModalOpen, handleItemClick, handleModalClose };
 };
