@@ -4,9 +4,6 @@ import { fetchIngredientsAsync, TAppDispatch, TRootState } from '@/store';
 
 export const useApp = () => {
   const dispatch = useDispatch<TAppDispatch>();
-  const ingredients = useSelector(
-    (state: TRootState) => state.ingredients.ingredients,
-  );
   const isLoading = useSelector(
     (state: TRootState) => state.ingredients.isLoading,
   );
@@ -19,5 +16,5 @@ export const useApp = () => {
     dispatch(fetchIngredientsAsync());
   }, [dispatch]);
 
-  return { ingredients, isLoading, isError, errorMessage };
+  return { isLoading, isError, errorMessage };
 };

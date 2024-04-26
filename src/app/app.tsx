@@ -10,7 +10,7 @@ import styles from './app.module.scss';
 import { useApp } from './hooks';
 
 export const App: FC = () => {
-  const { isError, errorMessage, ingredients, isLoading } = useApp();
+  const { isError, errorMessage, isLoading } = useApp();
 
   return (
     <MainLayout>
@@ -21,8 +21,8 @@ export const App: FC = () => {
           <ErrorPlaceholder text={errorMessage as string} />
         ) : (
           <>
-            <BurgerIngredients data={ingredients} />
-            <BurgerConstructor data={ingredients} />
+            <BurgerIngredients />
+            <BurgerConstructor />
           </>
         )}
       </section>

@@ -24,7 +24,13 @@ export const BurgerConstructorTotal: FC<TBurgerConstructorTotalProps> = ({
         </div>
         <Text textType="digitsMedium">{value}</Text>
       </div>
-      <Button type="primary" size="large" htmlType="submit" onClick={onClick}>
+      <Button
+        disabled={!value}
+        type="primary"
+        size="large"
+        htmlType="submit"
+        onClick={onClick}
+      >
         Оформить заказ
       </Button>
     </div>

@@ -6,15 +6,17 @@ import { useBurgerIngredientsTabs, useBurgerIngredientsModal } from './hooks';
 import { BurgerIngredientsDetails, BurgerIngredientsItems } from './ui';
 import { TIngredientItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
+import { useSelector } from 'react-redux';
+import { TRootState } from '@/store';
 
-type TBurgerIngredientsProps = {
-  data: TIngredientItem[];
-};
+export const BurgerIngredients: FC = () => {
+  const ingredients = useSelector(
+    (state: TRootState) => state.ingredients.ingredients,
+  );
 
-export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
   const mappedData = useMemo(
     () =>
-      data.reduce(
+      ingredients.reduce(
         (acc, item) => {
           if (!acc[item.type]) {
             acc[item.type] = [];
@@ -26,7 +28,7 @@ export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
         },
         {} as Record<string, TIngredientItem[]>,
       ),
-    [data],
+    [ingredients],
   );
 
   const { tabs, currentTab, handleSetCurrentTab } = useBurgerIngredientsTabs({
