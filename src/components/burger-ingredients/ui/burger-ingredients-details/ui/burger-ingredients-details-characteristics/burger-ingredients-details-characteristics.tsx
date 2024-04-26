@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { TDataItem } from '@/api';
+import { TIngredientItem } from '@/api';
 import styles from './burger-ingredients-details-characteristics.module.scss';
 import { Text } from '@/components';
 
 type TBurgerIngredientsItemsCharacteristicsProps = {
-  item: TDataItem;
+  item: TIngredientItem;
 };
 
 export const BurgerIngredientsDetailsCharacteristics: FC<

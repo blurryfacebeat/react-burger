@@ -1,33 +1,23 @@
-import { useEffect, useState } from 'react';
-import { getIngredients, TDataItem } from '@/api';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchIngredientsAsync, TAppDispatch, TRootState } from '@/store';
 
 export const useApp = () => {
-  const [dataItems, setDataItems] = useState<TDataItem[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const dispatch = useDispatch<TAppDispatch>();
+  const ingredients = useSelector(
+    (state: TRootState) => state.ingredients.ingredients,
+  );
+  const isLoading = useSelector(
+    (state: TRootState) => state.ingredients.isLoading,
+  );
+  const errorMessage = useSelector(
+    (state: TRootState) => state.ingredients.errorMessage,
+  );
+  const isError = !!errorMessage;
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await getIngredients();
+    dispatch(fetchIngredientsAsync());
+  }, [dispatch]);
 
-        if (response) {
-          setDataItems(response);
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          setErrorMessage(error.message);
-        }
-
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getData();
-  }, []);
-
-  return { dataItems, isLoading, isError, errorMessage };
+  return { ingredients, isLoading, isError, errorMessage };
 };

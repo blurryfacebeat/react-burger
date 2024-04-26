@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { Text } from '@/components';
 import styles from './burger-ingredients-details.module.scss';
 import classNames from 'classnames';
-import { TDataItem } from '@/api';
+import { TIngredientItem } from '@/api';
 import { BurgerIngredientsDetailsCharacteristics } from './ui';
 
 type TBurgerIngredientsModalProps = {
-  item: TDataItem | null;
+  item: TIngredientItem | null;
 };
 
 export const BurgerIngredientsDetails: FC<TBurgerIngredientsModalProps> = ({

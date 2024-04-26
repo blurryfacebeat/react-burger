@@ -1,9 +1,9 @@
 import { useModal } from '@/components';
 import { useRef } from 'react';
-import { TDataItem } from '@/api';
+import { TIngredientItem } from '@/api';
 
 type TUseBurgerIngredientsModalProps = {
-  data: TDataItem[];
+  data: TIngredientItem[];
 };
 
 export const useBurgerIngredientsModal = ({
@@ -15,7 +15,7 @@ export const useBurgerIngredientsModal = ({
     handleModalOpen,
   } = useModal();
 
-  const currentItem = useRef<TDataItem | null>(null);
+  const currentItem = useRef<TIngredientItem | null>(null);
 
   const handleItemClick = (itemId: string) => {
     handleModalOpen();

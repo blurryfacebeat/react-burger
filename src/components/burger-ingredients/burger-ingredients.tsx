@@ -4,11 +4,11 @@ import styles from './burger-ingredients.module.scss';
 import classNames from 'classnames';
 import { useBurgerIngredientsTabs, useBurgerIngredientsModal } from './hooks';
 import { BurgerIngredientsDetails, BurgerIngredientsItems } from './ui';
-import { TDataItem } from '@/api';
+import { TIngredientItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
 
 type TBurgerIngredientsProps = {
-  data: TDataItem[];
+  data: TIngredientItem[];
 };
 
 export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
@@ -24,7 +24,7 @@ export const BurgerIngredients: FC<TBurgerIngredientsProps> = ({ data }) => {
 
           return acc;
         },
-        {} as Record<string, TDataItem[]>,
+        {} as Record<string, TIngredientItem[]>,
       ),
     [data],
   );

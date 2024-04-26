@@ -4,12 +4,12 @@ import {
   BurgerIngredientsCategory,
   BurgerIngredientsItem,
 } from '@/components/burger-ingredients/ui';
-import { TDataItem } from '@/api';
+import { TIngredientItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
 import styles from './burger-ingredients-items.module.scss';
 
 type TBurgerIngredientsItemsProps = {
-  data: Record<string, TDataItem[]>;
+  data: Record<string, TIngredientItem[]>;
   onItemClick: (itemId: string) => void;
 };
 

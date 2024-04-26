@@ -7,10 +7,10 @@ import {
   BurgerConstructorOrder,
 } from '@/components/burger-constructor/ui';
 import { CustomScrollbar, Modal, useModal } from '@/components';
-import { TDataItem } from '@/api';
+import { TIngredientItem } from '@/api';
 
 type TBurgerConstructorProps = {
-  data: TDataItem[];
+  data: TIngredientItem[];
 };
 
 export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
