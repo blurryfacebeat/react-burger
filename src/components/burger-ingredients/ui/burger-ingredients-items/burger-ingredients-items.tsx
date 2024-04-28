@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { CustomScrollbar } from '@/components';
 import {
   BurgerIngredientsCategory,
@@ -13,18 +13,44 @@ import { TRootState } from '@/store';
 type TBurgerIngredientsItemsProps = {
   data: Record<string, TIngredientItem[]>;
   onItemClick: (item: TIngredientItem) => void;
+  onSetActiveTab: (value: string) => void;
 };
 
 export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
   data,
   onItemClick,
+  onSetActiveTab,
 }) => {
   const burgerConstructorCounts = useSelector(
     (state: TRootState) => state.burgerConstructor.counts,
   );
 
+  const handleScrollCapture = (event: MouseEvent<HTMLDivElement>) => {
+    const containerBounds = event.currentTarget.getBoundingClientRect();
+    const titles = event.currentTarget.querySelectorAll(
+      '[data-target=ingredientsHeader]',
+    );
+
+    for (let i = 0; i < titles.length; i++) {
+      const headerBounds = titles[i].getBoundingClientRect();
+
+      if (
+        headerBounds.top >= containerBounds.top &&
+        headerBounds.top <= containerBounds.bottom
+      ) {
+        const tabId = titles[i].getAttribute('id');
+        onSetActiveTab(tabId?.split('-')[0] as string);
+
+        return;
+      }
+    }
+  };
+
   return (
-    <CustomScrollbar className={styles.scrollBarContainer}>
+    <CustomScrollbar
+      className={styles.scrollBarContainer}
+      onScrollCapture={handleScrollCapture}
+    >
       <div className={styles.ingredientsContainer}>
         {Object.entries(data).map(([key, value]) => (
           <BurgerIngredientsCategory

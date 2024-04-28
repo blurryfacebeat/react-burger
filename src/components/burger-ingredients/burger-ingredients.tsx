@@ -50,7 +50,11 @@ export const BurgerIngredients: FC = () => {
         anchorTag={BURGER_INGREDIENTS_ANCHOR_TAG}
         className="mb-10"
       />
-      <BurgerIngredientsItems data={mappedData} onItemClick={handleItemClick} />
+      <BurgerIngredientsItems
+        data={mappedData}
+        onItemClick={handleItemClick}
+        onSetActiveTab={handleSetCurrentTab}
+      />
       {isModalOpen && (
         <Modal
           className={classNames(styles.burgerIngredientsModal, 'pb-15')}
