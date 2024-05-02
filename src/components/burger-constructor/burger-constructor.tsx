@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import styles from './burger-constructor.module.scss';
 import classNames from 'classnames';
 import {
@@ -7,64 +7,15 @@ import {
   BurgerConstructorOrder,
   BurgerConstructorEmpty,
 } from './ui';
-import {
-  BURGER_INGREDIENT_DRAG_AND_DROP_NAME,
-  CustomScrollbar,
-  Modal,
-  useModal,
-} from '@/components';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  swipeIngredientsInBurgerConstructor,
-  TAppDispatch,
-  TRootState,
-} from '@/store';
-import { useDrop } from 'react-dnd';
+import { CustomScrollbar, Modal, useModal } from '@/components';
+import { useBurgerConstructorDnd, useBurgerConstructorState } from './hooks';
 
 export const BurgerConstructor: FC = () => {
   const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
 
-  const dispatch = useDispatch<TAppDispatch>();
+  const { bun, total, ingredients } = useBurgerConstructorState();
 
-  const burgerConstructor = useSelector(
-    (state: TRootState) => state.burgerConstructor.burgerConstructor,
-  );
-
-  const bun = burgerConstructor.find((item) => item.type === 'bun')!;
-  const ingredients = burgerConstructor.filter((item) => item.type !== 'bun')!;
-
-  const total = useMemo(
-    () =>
-      burgerConstructor.reduce((acc, item) => {
-        if (item.type === 'bun') {
-          return acc + item.price * 2;
-        }
-
-        return acc + item.price;
-      }, 0),
-    [burgerConstructor],
-  );
-
-  const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: BURGER_INGREDIENT_DRAG_AND_DROP_NAME,
-    drop: () => ({
-      name: 'burgerConstructor',
-    }),
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  }));
-
-  const moveCard = (dragIndex: number, hoverIndex: number) => {
-    console.log(dragIndex, hoverIndex);
-    dispatch(
-      swipeIngredientsInBurgerConstructor({
-        fromIndex: dragIndex,
-        toIndex: hoverIndex,
-      }),
-    );
-  };
+  const { canDrop, isOver, drop, moveCard } = useBurgerConstructorDnd();
 
   return (
     <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
@@ -75,15 +26,15 @@ export const BurgerConstructor: FC = () => {
           canDrop && styles.dropContainerCanDrop,
         )}
       >
-        {burgerConstructor.length ? (
+        {ingredients.length || !!bun ? (
           <>
-            {bun && (
+            {!!bun && (
               <BurgerConstructorItem
                 text={`${bun.name} (верх)`}
                 thumbnail={bun.image}
                 price={bun.price}
                 type="top"
-                id={bun.key}
+                id={bun._id}
                 isDraggable={false}
                 isLocked
               />
@@ -112,7 +63,7 @@ export const BurgerConstructor: FC = () => {
                 thumbnail={bun.image}
                 price={bun.price}
                 type="bottom"
-                id={bun.key}
+                id={bun._id}
                 isDraggable={false}
                 isLocked
               />

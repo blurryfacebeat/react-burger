@@ -1,7 +1,10 @@
+@import "src/assets/styles/mixins";
+
 .burgerConstructorItem {
   display: flex;
   align-items: center;
   gap: 8px;
+  @include default-transition();
 }
 
 .dragIcon {
@@ -10,4 +13,8 @@
 
 .hiddenDragIcon {
   visibility: hidden;
+}
+
+.nullableOpacity {
+  opacity: 0;
 }

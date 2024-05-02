@@ -6,18 +6,31 @@ export type TBurgerConstructorIngredientItem = TIngredientItem & {
   key: string;
 };
 
+export type TBurgerConstructor = {
+  bun: TIngredientItem | null;
+  ingredients: TBurgerConstructorIngredientItem[];
+};
+
 type TBurgerConstructorState = {
-  burgerConstructor: TBurgerConstructorIngredientItem[];
+  burgerConstructor: TBurgerConstructor;
   counts: Record<string, number>;
 };
 
+type TSwipeIngredientsInBurgerConstructorPayload = {
+  toIndex: number;
+  fromIndex: number;
+};
+
 const initialState: TBurgerConstructorState = {
-  burgerConstructor: [],
+  burgerConstructor: {
+    bun: null,
+    ingredients: [],
+  },
   counts: {},
 };
 
 const updateCounts = (state: TBurgerConstructorState) => {
-  state.counts = state.burgerConstructor.reduce(
+  state.counts = state.burgerConstructor.ingredients.reduce(
     (acc, nextItem) => {
       if (!acc[nextItem._id]) {
         acc[nextItem._id] = 1;
@@ -37,45 +50,48 @@ const burgerConstructorSlice = createSlice({
   reducers: {
     addIngredientToConstructor(state, action: PayloadAction<TIngredientItem>) {
       if (action.payload.type === 'bun') {
-        state.burgerConstructor = state.burgerConstructor.filter(
-          (item) => item.type !== 'bun',
-        );
+        state.burgerConstructor.bun = action.payload;
+      } else {
+        state.burgerConstructor.ingredients.push({
+          ...action.payload,
+          key: uuidv4(),
+        });
       }
-
-      state.burgerConstructor.push({ ...action.payload, key: uuidv4() });
 
       updateCounts(state);
     },
     removeIngredientFromConstructor(state, action: PayloadAction<string>) {
-      state.burgerConstructor = state.burgerConstructor.filter(
-        (item) => item.key !== action.payload,
-      );
+      state.burgerConstructor.ingredients =
+        state.burgerConstructor.ingredients.filter(
+          (item) => item.key !== action.payload,
+        );
 
       updateCounts(state);
     },
     swipeIngredientsInBurgerConstructor(
       state,
-      action: PayloadAction<{ toIndex: number; fromIndex: number }>,
+      action: PayloadAction<TSwipeIngredientsInBurgerConstructorPayload>,
     ) {
       const { toIndex, fromIndex } = action.payload;
 
       if (typeof toIndex !== 'undefined' && typeof fromIndex !== 'undefined') {
-        const newConstructor = [...state.burgerConstructor];
+        const newIngredients = [
+          ...state.burgerConstructor.ingredients.filter(
+            (item) => item.type !== 'bun',
+          ),
+        ];
 
-        const movedItem = newConstructor[fromIndex];
+        const movedItem = newIngredients[fromIndex];
 
         if (fromIndex < toIndex) {
-          newConstructor.splice(toIndex + 1, 0, movedItem);
-          newConstructor.splice(fromIndex, 1);
+          newIngredients.splice(toIndex + 1, 0, movedItem);
+          newIngredients.splice(fromIndex, 1);
         } else {
-          newConstructor.splice(fromIndex, 1);
-          newConstructor.splice(toIndex, 0, movedItem);
+          newIngredients.splice(fromIndex, 1);
+          newIngredients.splice(toIndex, 0, movedItem);
         }
 
-        return {
-          ...state,
-          burgerConstructor: newConstructor,
-        };
+        state.burgerConstructor.ingredients = newIngredients;
       }
     },
   },

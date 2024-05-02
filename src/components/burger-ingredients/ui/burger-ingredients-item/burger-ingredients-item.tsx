@@ -1,48 +1,39 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import styles from './burger-ingredients-item.module.scss';
-import {
-  Text,
-  Price,
-  BURGER_INGREDIENT_DRAG_AND_DROP_NAME,
-} from '@/components';
+import { Text, Price } from '@/components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDrag } from 'react-dnd';
 import classNames from 'classnames';
 import { TIngredientItem } from '@/api';
-import { useDispatch } from 'react-redux';
-import { addIngredientToConstructor, TAppDispatch } from '@/store';
+import { useBurgerIngredientsItemDnd } from './hooks';
+import { useSelector } from 'react-redux';
+import { TRootState } from '@/store';
 
 type TBurgerIngredientsItemProps = {
   item: TIngredientItem;
-  count?: number;
   onClick: () => void;
-};
-
-type TDropResult = {
-  id: string;
 };
 
 export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
   item,
-  count,
   onClick,
 }) => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const burgerConstructorCounts = useSelector(
+    (state: TRootState) => state.burgerConstructor.counts,
+  );
 
-  const [{ isDragging }, drag] = useDrag(() => ({
-    item,
-    type: BURGER_INGREDIENT_DRAG_AND_DROP_NAME,
-    end: (item, monitor) => {
-      const dropResult = monitor.getDropResult<TDropResult>();
+  const bun = useSelector(
+    (state: TRootState) => state.burgerConstructor.burgerConstructor.bun,
+  );
 
-      if (item && dropResult) {
-        dispatch(addIngredientToConstructor(item));
-      }
-    },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
+  const count = useMemo(() => {
+    if (item.type === 'bun' && bun?._id === item._id) {
+      return 1;
+    }
+
+    return burgerConstructorCounts[item._id];
+  }, [bun, burgerConstructorCounts, item._id, item.type]);
+
+  const { isDragging, drag } = useBurgerIngredientsItemDnd({ item });
 
   return (
     <li
