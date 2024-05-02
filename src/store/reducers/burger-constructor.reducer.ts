@@ -74,25 +74,10 @@ const burgerConstructorSlice = createSlice({
     ) {
       const { toIndex, fromIndex } = action.payload;
 
-      if (typeof toIndex !== 'undefined' && typeof fromIndex !== 'undefined') {
-        const newIngredients = [
-          ...state.burgerConstructor.ingredients.filter(
-            (item) => item.type !== 'bun',
-          ),
-        ];
+      const ingredients = [...state.burgerConstructor.ingredients];
+      ingredients.splice(toIndex, 0, ingredients.splice(fromIndex, 1)[0]);
 
-        const movedItem = newIngredients[fromIndex];
-
-        if (fromIndex < toIndex) {
-          newIngredients.splice(toIndex + 1, 0, movedItem);
-          newIngredients.splice(fromIndex, 1);
-        } else {
-          newIngredients.splice(fromIndex, 1);
-          newIngredients.splice(toIndex, 0, movedItem);
-        }
-
-        state.burgerConstructor.ingredients = newIngredients;
-      }
+      state.burgerConstructor.ingredients = ingredients;
     },
   },
 });
