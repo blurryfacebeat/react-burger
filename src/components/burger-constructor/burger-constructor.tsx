@@ -7,15 +7,27 @@ import {
   BurgerConstructorOrder,
   BurgerConstructorEmpty,
 } from './ui';
-import { CustomScrollbar, Modal, useModal } from '@/components';
-import { useBurgerConstructorDnd, useBurgerConstructorState } from './hooks';
+import { CustomScrollbar, Modal } from '@/components';
+import {
+  useBurgerConstructorDnd,
+  useBurgerConstructorState,
+  useBurgerConstructorModal,
+} from './hooks';
+import { useDispatch } from 'react-redux';
+import { TAppDispatch } from '@/store';
+import { createOrderAsync } from '@/store/actions/current-order.action.ts';
 
 export const BurgerConstructor: FC = () => {
-  const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
+  const { isModalOpen, handleModalClose } = useBurgerConstructorModal();
 
   const { bun, total, ingredients } = useBurgerConstructorState();
 
   const { canDrop, isOver, drop, moveCard } = useBurgerConstructorDnd();
+
+  const dispatch = useDispatch<TAppDispatch>();
+  const createOrder = () => {
+    dispatch(createOrderAsync());
+  };
 
   return (
     <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
@@ -73,7 +85,7 @@ export const BurgerConstructor: FC = () => {
           <BurgerConstructorEmpty isDroppedItemOver={isOver} />
         )}
       </div>
-      <BurgerConstructorTotal value={total} onClick={handleModalOpen} />
+      <BurgerConstructorTotal value={total} onClick={createOrder} />
       {isModalOpen && (
         <Modal
           className={classNames(styles.burgerConstructorModal, 'pt-15 pb-30')}

@@ -3,6 +3,7 @@ import {
   ingredientsReducer,
   selectedIngredientReducer,
   burgerConstructorReducer,
+  currentOrderReducer,
 } from '@/store/reducers';
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     ingredients: ingredientsReducer,
     selectedIngredient: selectedIngredientReducer,
     burgerConstructor: burgerConstructorReducer,
+    currentOrder: currentOrderReducer,
   },
   devTools: true,
 });

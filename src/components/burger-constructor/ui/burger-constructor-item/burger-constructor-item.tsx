@@ -54,14 +54,10 @@ export const BurgerConstructorItem: FC<TBurgerConstructorItemProps> = ({
         styles.burgerConstructorItem,
         className,
         isDragging && styles.nullableOpacity,
+        isDraggable && styles.draggable,
       )}
     >
-      <span
-        className={classNames(
-          styles.dragIcon,
-          !isDraggable && styles.hiddenDragIcon,
-        )}
-      >
+      <span className={classNames(!isDraggable && styles.hiddenDragIcon)}>
         <DragIcon type="primary" />
       </span>
       <ConstructorElement

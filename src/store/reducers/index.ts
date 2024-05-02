@@ -6,3 +6,6 @@ export * from './selected-ingredient.reducer.ts';
 
 export { default as burgerConstructorReducer } from './burger-constructor.reducer.ts';
 export * from './burger-constructor.reducer.ts';
+
+export { default as currentOrderReducer } from './current-order.reducer.ts';
+export * from './current-order.reducer.ts';

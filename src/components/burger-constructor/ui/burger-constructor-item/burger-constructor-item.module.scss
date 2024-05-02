@@ -7,14 +7,14 @@
   @include default-transition();
 }
 
-.dragIcon {
-  cursor: grab;
-}
-
 .hiddenDragIcon {
   visibility: hidden;
 }
 
 .nullableOpacity {
   opacity: 0;
+}
+
+.draggable {
+  cursor: grab;
 }
