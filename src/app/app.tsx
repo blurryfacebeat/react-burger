@@ -7,10 +7,10 @@ import {
   MainLayout,
 } from '@/components';
 import styles from './app.module.scss';
-import { useApp } from './hooks';
+import { useIngredients } from './hooks';
 
 export const App: FC = () => {
-  const { isError, errorMessage, isLoading } = useApp();
+  const { isError, errorMessage, isLoading } = useIngredients();
 
   return (
     <MainLayout>

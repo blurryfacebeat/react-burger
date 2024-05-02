@@ -5,8 +5,9 @@ import {
   addCurrentOrderSuccess,
   TRootState,
 } from '@/store';
-import { createOrder, TIngredientItem } from '@/api';
+import { createOrder } from '@/api';
 
+// TODO Попробовать createAsyncThunk вместо стандартный Thunk Actions
 export const createOrderAsync =
   (): ThunkAction<void, TRootState, unknown, any> =>
   async (dispatch, getState) => {
@@ -16,20 +17,19 @@ export const createOrderAsync =
       const burgerConstructorState =
         getState().burgerConstructor.burgerConstructor;
 
-      const ingredients: TIngredientItem[] = [
-        ...burgerConstructorState.ingredients,
+      const orderIds = [
+        burgerConstructorState.bun!._id,
+        ...burgerConstructorState.ingredients.map((item) => item._id),
+        burgerConstructorState.bun!._id,
       ];
 
-      if (burgerConstructorState.bun) {
-        ingredients.push(burgerConstructorState.bun);
-      }
-
-      const order = await createOrder(ingredients.map((item) => item._id));
+      const order = await createOrder(orderIds);
 
       dispatch(addCurrentOrderSuccess(order));
     } catch (error) {
       if (error instanceof Error) {
-        dispatch(addCurrentOrderFailure(error.message));
+        dispatch(addCurrentOrderFailure());
+        window.alert(error.message);
       }
     }
   };

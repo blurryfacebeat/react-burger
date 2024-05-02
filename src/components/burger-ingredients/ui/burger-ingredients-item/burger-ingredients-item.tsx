@@ -17,8 +17,9 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
   item,
   onClick,
 }) => {
-  const burgerConstructorCounts = useSelector(
-    (state: TRootState) => state.burgerConstructor.counts,
+  const ingredients = useSelector(
+    (state: TRootState) =>
+      state.burgerConstructor.burgerConstructor.ingredients,
   );
 
   const bun = useSelector(
@@ -27,11 +28,12 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
 
   const count = useMemo(() => {
     if (item.type === 'bun' && bun?._id === item._id) {
-      return 1;
+      return 2;
     }
 
-    return burgerConstructorCounts[item._id];
-  }, [bun, burgerConstructorCounts, item._id, item.type]);
+    return ingredients.filter((ingredient) => ingredient._id === item._id)
+      .length;
+  }, [bun, ingredients, item._id, item.type]);
 
   const { isDragging, drag } = useBurgerIngredientsItemDnd({ item });
 
@@ -44,7 +46,7 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
       ref={drag}
       onClick={onClick}
     >
-      {count && <Counter count={count} size="default" />}
+      {!!count && <Counter count={count} size="default" />}
       <img src={item.image} alt="burger ingredient" />
       <Price>{item.price}</Price>
       <Text>{item.name}</Text>

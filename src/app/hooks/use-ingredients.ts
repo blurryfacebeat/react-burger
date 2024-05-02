@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchIngredientsAsync, TAppDispatch, TRootState } from '@/store';
 
-export const useApp = () => {
+export const useIngredients = () => {
   const dispatch = useDispatch<TAppDispatch>();
   const isLoading = useSelector(
     (state: TRootState) => state.ingredients.isLoading,

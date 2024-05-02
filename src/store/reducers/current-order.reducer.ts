@@ -37,10 +37,9 @@ const currentOrderSlice = createSlice({
       state.order = action.payload;
       state.isModalOpen = true;
     },
-    addCurrentOrderFailure(state, action: PayloadAction<string>) {
+    addCurrentOrderFailure(state) {
       state.isLoading = false;
-
-      window.alert(action.payload);
+      state.order = initialState.order;
     },
     closeCurrentOrderModal(state) {
       state.isModalOpen = false;

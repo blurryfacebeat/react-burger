@@ -22,6 +22,12 @@ export const BurgerConstructorTotal: FC<TBurgerConstructorTotalProps> = ({
     (state: TRootState) => state.currentOrder.isLoading,
   );
 
+  const bun = useSelector(
+    (state: TRootState) => state.burgerConstructor.burgerConstructor.bun,
+  );
+
+  const isButtonDisabled = !value || !bun || isOrderCreateLoading;
+
   return (
     <div className={classNames(styles.burgerConstructorTotal, 'pt-6')}>
       <div className={styles.value}>
@@ -31,7 +37,7 @@ export const BurgerConstructorTotal: FC<TBurgerConstructorTotalProps> = ({
         <Text textType="digitsMedium">{value}</Text>
       </div>
       <Button
-        disabled={!value || isOrderCreateLoading}
+        disabled={isButtonDisabled}
         type="primary"
         size="large"
         htmlType="submit"
