@@ -13,18 +13,22 @@ export const useBurgerIngredientsItemsScroll = ({
       '[data-target=ingredientsHeader]',
     );
 
+    let closestDistance = Number.MAX_SAFE_INTEGER;
+    let closestHeaderIndex = -1;
+
     for (let i = 0; i < titles.length; i++) {
       const headerBounds = titles[i].getBoundingClientRect();
+      const distanceToTop = Math.abs(headerBounds.top - containerBounds.top);
 
-      if (
-        headerBounds.top >= containerBounds.top &&
-        headerBounds.top <= containerBounds.bottom
-      ) {
-        const tabId = titles[i].getAttribute('id');
-        onSetActiveTab(tabId?.split('-')[0] as string);
-
-        return;
+      if (distanceToTop < closestDistance) {
+        closestDistance = distanceToTop;
+        closestHeaderIndex = i;
       }
+    }
+
+    if (closestHeaderIndex !== -1) {
+      const tabId = titles[closestHeaderIndex].getAttribute('id');
+      onSetActiveTab(tabId?.split('-')[0] as string);
     }
   };
 
