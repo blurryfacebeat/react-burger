@@ -13,12 +13,18 @@ import {
   Modal,
   useModal,
 } from '@/components';
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  swipeIngredientsInBurgerConstructor,
+  TAppDispatch,
+  TRootState,
+} from '@/store';
 import { useDrop } from 'react-dnd';
 
 export const BurgerConstructor: FC = () => {
   const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
+
+  const dispatch = useDispatch<TAppDispatch>();
 
   const burgerConstructor = useSelector(
     (state: TRootState) => state.burgerConstructor.burgerConstructor,
@@ -50,6 +56,16 @@ export const BurgerConstructor: FC = () => {
     }),
   }));
 
+  const moveCard = (dragIndex: number, hoverIndex: number) => {
+    console.log(dragIndex, hoverIndex);
+    dispatch(
+      swipeIngredientsInBurgerConstructor({
+        fromIndex: dragIndex,
+        toIndex: hoverIndex,
+      }),
+    );
+  };
+
   return (
     <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
       <div
@@ -68,20 +84,23 @@ export const BurgerConstructor: FC = () => {
                 price={bun.price}
                 type="top"
                 id={bun.key}
+                isDraggable={false}
                 isLocked
               />
             )}
             {!!ingredients.length && (
               <CustomScrollbar className={styles.scrollBarContainer}>
                 <ul className={styles.burgerConstructorContainer}>
-                  {ingredients.map((item) => (
+                  {ingredients.map((item, idx) => (
                     <BurgerConstructorItem
                       key={item.key}
                       text={item.name}
                       thumbnail={item.image}
                       price={item.price}
                       id={item.key}
+                      index={idx}
                       isDraggable
+                      onMoveCard={moveCard}
                     />
                   ))}
                 </ul>
@@ -94,6 +113,7 @@ export const BurgerConstructor: FC = () => {
                 price={bun.price}
                 type="bottom"
                 id={bun.key}
+                isDraggable={false}
                 isLocked
               />
             )}

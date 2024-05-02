@@ -53,10 +53,38 @@ const burgerConstructorSlice = createSlice({
 
       updateCounts(state);
     },
+    swipeIngredientsInBurgerConstructor(
+      state,
+      action: PayloadAction<{ toIndex: number; fromIndex: number }>,
+    ) {
+      const { toIndex, fromIndex } = action.payload;
+
+      if (typeof toIndex !== 'undefined' && typeof fromIndex !== 'undefined') {
+        const newConstructor = [...state.burgerConstructor];
+
+        const movedItem = newConstructor[fromIndex];
+
+        if (fromIndex < toIndex) {
+          newConstructor.splice(toIndex + 1, 0, movedItem);
+          newConstructor.splice(fromIndex, 1);
+        } else {
+          newConstructor.splice(fromIndex, 1);
+          newConstructor.splice(toIndex, 0, movedItem);
+        }
+
+        return {
+          ...state,
+          burgerConstructor: newConstructor,
+        };
+      }
+    },
   },
 });
 
-export const { addIngredientToConstructor, removeIngredientFromConstructor } =
-  burgerConstructorSlice.actions;
+export const {
+  addIngredientToConstructor,
+  removeIngredientFromConstructor,
+  swipeIngredientsInBurgerConstructor,
+} = burgerConstructorSlice.actions;
 
 export default burgerConstructorSlice.reducer;
