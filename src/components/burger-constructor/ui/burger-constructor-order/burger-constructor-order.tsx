@@ -3,15 +3,21 @@ import classNames from 'classnames';
 import { Text } from '@/components';
 import styles from './burger-constructor-order.module.scss';
 import doneIcon from '@/assets/images/done-icon.svg';
+import { useSelector } from 'react-redux';
+import { TRootState } from '@/store';
 
 export const BurgerConstructorOrder: FC = () => {
+  const orderNumber = useSelector(
+    (state: TRootState) => state.currentOrder.order?.number,
+  );
+
   return (
     <div className={classNames(styles.content, 'pt-20')}>
       <Text
         className={classNames(styles.orderNumber, 'mb-8')}
         textType="digitsLarge"
       >
-        034536
+        {orderNumber}
       </Text>
       <Text className="mb-15" textType="medium">
         идентификатор заказа

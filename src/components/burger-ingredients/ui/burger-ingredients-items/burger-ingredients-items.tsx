@@ -4,21 +4,31 @@ import {
   BurgerIngredientsCategory,
   BurgerIngredientsItem,
 } from '@/components/burger-ingredients/ui';
-import { TDataItem } from '@/api';
+import { TIngredientItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
 import styles from './burger-ingredients-items.module.scss';
+import { useBurgerIngredientsItemsScroll } from './hooks';
 
 type TBurgerIngredientsItemsProps = {
-  data: Record<string, TDataItem[]>;
-  onItemClick: (itemId: string) => void;
+  data: Record<string, TIngredientItem[]>;
+  onItemClick: (item: TIngredientItem) => void;
+  onSetActiveTab: (value: string) => void;
 };
 
 export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
   data,
   onItemClick,
+  onSetActiveTab,
 }) => {
+  const { handleScrollCapture } = useBurgerIngredientsItemsScroll({
+    onSetActiveTab,
+  });
+
   return (
-    <CustomScrollbar className={styles.scrollBarContainer}>
+    <CustomScrollbar
+      className={styles.scrollBarContainer}
+      onScrollCapture={handleScrollCapture}
+    >
       <div className={styles.ingredientsContainer}>
         {Object.entries(data).map(([key, value]) => (
           <BurgerIngredientsCategory
@@ -29,10 +39,8 @@ export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
             {value.map((item) => (
               <BurgerIngredientsItem
                 key={item._id}
-                price={item.price}
-                name={item.name}
-                image={item.image}
-                onClick={() => onItemClick(item._id)}
+                item={item}
+                onClick={() => onItemClick(item)}
               />
             ))}
           </BurgerIngredientsCategory>

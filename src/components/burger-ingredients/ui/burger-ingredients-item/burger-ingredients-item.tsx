@@ -1,29 +1,55 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import styles from './burger-ingredients-item.module.scss';
 import { Text, Price } from '@/components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import classNames from 'classnames';
+import { TIngredientItem } from '@/api';
+import { useBurgerIngredientsItemDnd } from './hooks';
+import { useSelector } from 'react-redux';
+import { TRootState } from '@/store';
 
 type TBurgerIngredientsItemProps = {
-  image: string;
-  name: string;
-  price: number;
+  item: TIngredientItem;
   onClick: () => void;
-  count?: number;
 };
 
 export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
-  image,
-  price,
-  name,
-  count,
+  item,
   onClick,
 }) => {
+  const ingredients = useSelector(
+    (state: TRootState) =>
+      state.burgerConstructor.burgerConstructor.ingredients,
+  );
+
+  const bun = useSelector(
+    (state: TRootState) => state.burgerConstructor.burgerConstructor.bun,
+  );
+
+  const count = useMemo(() => {
+    if (item.type === 'bun' && bun?._id === item._id) {
+      return 2;
+    }
+
+    return ingredients.filter((ingredient) => ingredient._id === item._id)
+      .length;
+  }, [bun, ingredients, item._id, item.type]);
+
+  const { isDragging, drag } = useBurgerIngredientsItemDnd({ item });
+
   return (
-    <li className={styles.burgerIngredientsItem} onClick={onClick}>
-      {count && <Counter count={count} size="default" />}
-      <img src={image} alt="burger ingredient" />
-      <Price>{price}</Price>
-      <Text>{name}</Text>
+    <li
+      className={classNames(
+        styles.burgerIngredientsItem,
+        isDragging && styles.burgerIngredientsItemAnimated,
+      )}
+      ref={drag}
+      onClick={onClick}
+    >
+      {!!count && <Counter count={count} size="default" />}
+      <img src={item.image} alt="burger ingredient" />
+      <Price>{item.price}</Price>
+      <Text>{item.name}</Text>
     </li>
   );
 };

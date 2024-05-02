@@ -1,72 +1,99 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import styles from './burger-constructor.module.scss';
 import classNames from 'classnames';
 import {
   BurgerConstructorItem,
   BurgerConstructorTotal,
   BurgerConstructorOrder,
-} from '@/components/burger-constructor/ui';
-import { CustomScrollbar, Modal, useModal } from '@/components';
-import { TDataItem } from '@/api';
+  BurgerConstructorEmpty,
+} from './ui';
+import { CustomScrollbar, Modal } from '@/components';
+import {
+  useBurgerConstructorDnd,
+  useBurgerConstructorState,
+  useBurgerConstructorModal,
+} from './hooks';
+import { useDispatch } from 'react-redux';
+import { TAppDispatch } from '@/store';
+import { createOrderAsync } from '@/store/actions/current-order.action.ts';
 
-type TBurgerConstructorProps = {
-  data: TDataItem[];
-};
+export const BurgerConstructor: FC = () => {
+  const { isModalOpen, handleModalClose } = useBurgerConstructorModal();
 
-export const BurgerConstructor: FC<TBurgerConstructorProps> = ({ data }) => {
-  const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
+  const { bun, total, ingredients } = useBurgerConstructorState();
 
-  const bun = data.find((item) => item.type === 'bun')!;
-  const ingredients = data.filter((item) => item.type !== 'bun')!;
+  const { canDrop, isOver, drop, moveCard } = useBurgerConstructorDnd();
 
-  const total = useMemo(
-    () =>
-      data.reduce((acc, item) => {
-        return acc + item.price;
-      }, 0),
-    [data],
-  );
+  const dispatch = useDispatch<TAppDispatch>();
+  const createOrder = () => {
+    dispatch(createOrderAsync());
+  };
 
   return (
-    <>
-      <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
-        <BurgerConstructorItem
-          text={`${bun.name} (верх)`}
-          thumbnail={bun.image}
-          price={bun.price}
-          type="top"
-          isLocked
-        />
-        <CustomScrollbar className={styles.scrollBarContainer}>
-          <ul className={styles.burgerConstructorContainer}>
-            {ingredients.map((item) => (
+    <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
+      <div
+        ref={drop}
+        className={classNames(
+          styles.dropContainer,
+          canDrop && styles.dropContainerCanDrop,
+        )}
+      >
+        {ingredients.length || !!bun ? (
+          <>
+            {!!bun && (
               <BurgerConstructorItem
-                key={item._id}
-                text={item.name}
-                thumbnail={item.image}
-                price={item.price}
-                isDraggable
+                text={`${bun.name} (верх)`}
+                thumbnail={bun.image}
+                price={bun.price}
+                type="top"
+                id={bun._id}
+                isDraggable={false}
+                isLocked
               />
-            ))}
-          </ul>
-        </CustomScrollbar>
-        <BurgerConstructorItem
-          text={`${bun.name} (низ)`}
-          thumbnail={bun.image}
-          price={bun.price}
-          type="bottom"
-          isLocked
-        />
-        <BurgerConstructorTotal value={total} onClick={handleModalOpen} />
-        {isModalOpen && (
-          <Modal
-            className={classNames(styles.burgerConstructorModal, 'pt-15 pb-30')}
-            onClose={handleModalClose}
-          >
-            <BurgerConstructorOrder />
-          </Modal>
+            )}
+            {!!ingredients.length && (
+              <CustomScrollbar className={styles.scrollBarContainer}>
+                <ul className={styles.burgerConstructorContainer}>
+                  {ingredients.map((item, idx) => (
+                    <BurgerConstructorItem
+                      key={item.key}
+                      text={item.name}
+                      thumbnail={item.image}
+                      price={item.price}
+                      id={item.key}
+                      index={idx}
+                      isDraggable
+                      onMoveCard={moveCard}
+                    />
+                  ))}
+                </ul>
+              </CustomScrollbar>
+            )}
+            {!!bun && (
+              <BurgerConstructorItem
+                text={`${bun.name} (низ)`}
+                thumbnail={bun.image}
+                price={bun.price}
+                type="bottom"
+                id={bun._id}
+                isDraggable={false}
+                isLocked
+              />
+            )}
+          </>
+        ) : (
+          <BurgerConstructorEmpty isDroppedItemOver={isOver} />
         )}
       </div>
-    </>
+      <BurgerConstructorTotal value={total} onClick={createOrder} />
+      {isModalOpen && (
+        <Modal
+          className={classNames(styles.burgerConstructorModal, 'pt-15 pb-30')}
+          onClose={handleModalClose}
+        >
+          <BurgerConstructorOrder />
+        </Modal>
+      )}
+    </div>
   );
 };

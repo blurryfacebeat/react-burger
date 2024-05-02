@@ -18,9 +18,9 @@ export const NavigationLink: FC<TNavigationLinkProps> = ({
   children,
 }) => {
   return (
-    <div className={classNames(styles.navigationLink, 'p-5')}>
+    <a href="#" className={classNames(styles.navigationLink, 'p-5')}>
       <Icon type={isActive ? 'primary' : 'secondary'} />
       <Text textType={isActive ? 'default' : 'inactiveColor'}>{children}</Text>
-    </div>
+    </a>
   );
 };

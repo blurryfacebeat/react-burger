@@ -1,7 +1,7 @@
 import { MAIN_URL } from '@/api/api.constants.ts';
 import { checkResponse } from '@/utils';
 
-export type TDataItem = {
+export type TIngredientItem = {
   _id: string;
   name: string;
   type: string;
@@ -18,10 +18,10 @@ export type TDataItem = {
 
 type TResponse = {
   success: boolean;
-  data: TDataItem[];
+  data: TIngredientItem[];
 };
 
-export const getIngredients = async (): Promise<TDataItem[] | undefined> => {
+export const getIngredients = async (): Promise<TIngredientItem[]> => {
   try {
     const response: TResponse = await fetch(`${MAIN_URL}/api/ingredients`).then(
       checkResponse,

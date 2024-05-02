@@ -1,1 +1,1 @@
-export { useApp } from './use-app.ts';
+export { useIngredients } from './use-ingredients.ts';

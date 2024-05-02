@@ -16,7 +16,7 @@ export const BurgerIngredientsCategory: FC<TBurgerIngredientsCategoryProps> = ({
 }) => {
   return (
     <div className={styles.burgerIngredientsCategory}>
-      <h2 id={`${category}-${anchorTag}`}>
+      <h2 data-target="ingredientsHeader" id={`${category}-${anchorTag}`}>
         <Text textType="medium" className="mb-6">
           {INGREDIENTS_MAP[category]}
         </Text>
