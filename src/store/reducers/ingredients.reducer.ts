@@ -29,6 +29,7 @@ const ingredientsSlice = createSlice({
     fetchIngredientsFailure(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.errorMessage = action.payload;
+      state.ingredients = initialState.ingredients;
     },
   },
 });
