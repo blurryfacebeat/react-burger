@@ -10,3 +10,7 @@ export * from './loader';
 export * from './app-header';
 export * from './placeholders';
 export * from './modal';
+export * from './home';
+export * from './register';
+export * from './base-link';
+export * from './login';

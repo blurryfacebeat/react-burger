@@ -1,0 +1,27 @@
+.container {
+  margin: 180px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.subtext {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
