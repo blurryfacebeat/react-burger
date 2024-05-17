@@ -14,3 +14,5 @@ export * from './home';
 export * from './register';
 export * from './base-link';
 export * from './login';
+export * from './forgot-password';
+export * from './reset-password';
