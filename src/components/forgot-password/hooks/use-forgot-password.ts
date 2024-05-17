@@ -1,14 +1,30 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { resetPassword } from '@/api';
+import { isCorrectedEmail } from '@/utils';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/router';
 
 export const useForgotPassword = () => {
   const [email, setEmail] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+
+    if (isCorrectedEmail(email)) {
+      try {
+        await resetPassword(email);
+        navigate(ROUTES.RESET_PASSWORD);
+      } catch (error) {
+        if (error instanceof Error) {
+          window.alert(error.message);
+        }
+      }
+    }
   };
 
   return { email, handleChangeEmail, handleSubmit };

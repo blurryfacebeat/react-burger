@@ -8,6 +8,7 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './login.module.scss';
+import { ROUTES } from '@/router';
 
 export const Login: FC = () => {
   const {
@@ -42,11 +43,11 @@ export const Login: FC = () => {
         <div className={classNames(styles.subtextContainer, 'mt-20')}>
           <div className={styles.subtext}>
             <Text textType="inactiveColor">Вы — новый пользователь?</Text>
-            <BaseLink to="/register">Зарегистрироваться</BaseLink>
+            <BaseLink to={ROUTES.REGISTER}>Зарегистрироваться</BaseLink>
           </div>
           <div className={styles.subtext}>
             <Text textType="inactiveColor">Забыли пароль?</Text>
-            <BaseLink to="/forgot-password">Восстановить пароль</BaseLink>
+            <BaseLink to={ROUTES.FORGOT_PASSWORD}>Восстановить пароль</BaseLink>
           </div>
         </div>
       </form>

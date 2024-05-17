@@ -7,6 +7,7 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import classNames from 'classnames';
+import { ROUTES } from '@/router';
 
 export const ForgotPassword: FC = () => {
   const { email, handleChangeEmail, handleSubmit } = useForgotPassword();
@@ -26,10 +27,12 @@ export const ForgotPassword: FC = () => {
             onChange={handleChangeEmail}
           />
         </div>
-        <Button htmlType="submit">Восстановить</Button>
+        <Button disabled={!email} htmlType="submit">
+          Восстановить
+        </Button>
         <div className={classNames(styles.subtext, 'mt-20')}>
           <Text textType="inactiveColor">Вспомнили пароль?</Text>
-          <BaseLink to="/login">Войти</BaseLink>
+          <BaseLink to={ROUTES.LOGIN}>Войти</BaseLink>
         </div>
       </form>
     </MainLayout>

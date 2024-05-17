@@ -8,6 +8,7 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import classNames from 'classnames';
+import { ROUTES } from '@/router';
 
 export const Register: FC = () => {
   const {
@@ -50,7 +51,7 @@ export const Register: FC = () => {
         <Button htmlType="submit">Зарегистрироваться</Button>
         <div className={classNames(styles.subtext, 'mt-20')}>
           <Text textType="inactiveColor">Уже зарегистрированы?</Text>
-          <BaseLink to="/login">Войти</BaseLink>
+          <BaseLink to={ROUTES.LOGIN}>Войти</BaseLink>
         </div>
       </form>
     </MainLayout>

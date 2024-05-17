@@ -22,7 +22,7 @@ export const createOrder = async (ingredients: string[]) => {
     const { name, order } = response;
 
     return { name, number: order.number };
-  } catch (error) {
+  } catch {
     throw new Error('Ошибка при создании заказа');
   }
 };

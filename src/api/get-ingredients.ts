@@ -29,7 +29,7 @@ export const getIngredients = async (): Promise<TIngredientItem[]> => {
     const { data } = response;
 
     return data;
-  } catch (error) {
+  } catch {
     throw new Error('Ошибка при загрузке ингредиентов');
   }
 };

@@ -8,6 +8,7 @@ import {
   Input,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ROUTES } from '@/router';
 
 export const ResetPassword: FC = () => {
   const {
@@ -21,6 +22,9 @@ export const ResetPassword: FC = () => {
   return (
     <MainLayout>
       <form className={styles.container} onSubmit={handleSubmit}>
+        <Text className="mb-6" textType="medium">
+          Восстановление пароля
+        </Text>
         <div className={classNames(styles.fields, 'mb-6')}>
           <PasswordInput
             placeholder="Введите новый пароль"
@@ -35,10 +39,12 @@ export const ResetPassword: FC = () => {
             onChange={handleChangeCode}
           />
         </div>
-        <Button htmlType="submit">Сохранить</Button>
+        <Button disabled={!password || !code} htmlType="submit">
+          Сохранить
+        </Button>
         <div className={classNames(styles.subtext, 'mt-20')}>
           <Text textType="inactiveColor">Вспомнили пароль?</Text>
-          <BaseLink to="/login">Войти</BaseLink>
+          <BaseLink to={ROUTES.LOGIN}>Войти</BaseLink>
         </div>
       </form>
     </MainLayout>
