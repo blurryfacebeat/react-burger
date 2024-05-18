@@ -1,5 +1,5 @@
 import { MAIN_URL } from './api.constants.ts';
-import { checkResponse } from '@/utils';
+import { checkResponse } from './api.utils.ts';
 
 type TResponse = {
   success: boolean;

@@ -1,9 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { register } from '@/api';
+import { useNavigate } from 'react-router-dom';
 
 export const useRegister = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -17,8 +20,18 @@ export const useRegister = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+
+    try {
+      await register(email, password, name);
+      window.alert('Вы успешно зарегистрировались');
+      navigate('/');
+    } catch (error) {
+      if (error instanceof Error) {
+        window.alert(error.message);
+      }
+    }
   };
 
   return {

@@ -1,5 +1,5 @@
 import { MAIN_URL } from '@/api/api.constants.ts';
-import { checkResponse } from '@/utils';
+import { checkResponse } from './api.utils.ts';
 
 export type TIngredientItem = {
   _id: string;

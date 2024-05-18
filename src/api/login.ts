@@ -1,11 +1,11 @@
 import { MAIN_URL } from '@/api/api.constants.ts';
 import { checkResponse } from './api.utils.ts';
 
-export const resetPassword = async (email: string): Promise<boolean> => {
+export const login = async (email: string, password: string) => {
   try {
-    await fetch(`${MAIN_URL}/api/password-reset`, {
+    await fetch(`${MAIN_URL}/api/auth/login`, {
       method: 'POST',
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, password }),
       headers: {
         'Content-Type': 'application/json',
       },

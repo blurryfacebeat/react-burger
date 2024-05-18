@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { RouterProvider } from '@/router';
+import { Outlet } from 'react-router-dom';
 
 export const App: FC = () => {
-  return <RouterProvider />;
+  return <Outlet />;
 };
