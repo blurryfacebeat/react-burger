@@ -6,3 +6,5 @@ export * from './confirm-reset-password.ts';
 export * from './login.ts';
 export * from './register.ts';
 export * from './api.utils.ts';
+export * from './update-profile.ts';
+export * from './get-profile.ts';

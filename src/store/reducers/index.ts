@@ -9,3 +9,6 @@ export * from './burger-constructor.reducer.ts';
 
 export { default as currentOrderReducer } from './current-order.reducer.ts';
 export * from './current-order.reducer.ts';
+
+export { default as profileReducer } from './profile.reducer.ts';
+export * from './profile.reducer.ts';

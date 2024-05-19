@@ -14,8 +14,7 @@ import {
   useBurgerConstructorModal,
 } from './hooks';
 import { useDispatch } from 'react-redux';
-import { TAppDispatch } from '@/store';
-import { createOrderAsync } from '@/store/actions/current-order.action.ts';
+import { TAppDispatch, createOrderAsync } from '@/store';
 
 export const BurgerConstructor: FC = () => {
   const { isModalOpen, handleModalClose } = useBurgerConstructorModal();

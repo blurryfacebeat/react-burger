@@ -1,6 +1,14 @@
-import { FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getProfileAsync, TAppDispatch } from '@/store';
+import { RouterProvider } from '@/router';
 
 export const App: FC = () => {
-  return <Outlet />;
+  const dispatch = useDispatch<TAppDispatch>();
+
+  useEffect(() => {
+    dispatch(getProfileAsync());
+  }, [dispatch]);
+
+  return <RouterProvider />;
 };

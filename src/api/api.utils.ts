@@ -14,7 +14,7 @@ export const refreshToken = async () => {
       'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify({
-      token: localStorage.getItem('refreshToken'),
+      token: refreshTokenLocalStorage.get(),
     }),
   })
     .then(checkResponse)
@@ -23,8 +23,8 @@ export const refreshToken = async () => {
         return Promise.reject(refreshData);
       }
 
-      accessTokenLocalStorage.set(refreshData.refreshToken);
-      refreshTokenLocalStorage.set(refreshData.accessToken);
+      accessTokenLocalStorage.set(refreshData.accessToken);
+      refreshTokenLocalStorage.set(refreshData.refreshToken);
 
       return refreshData;
     });
@@ -32,19 +32,25 @@ export const refreshToken = async () => {
 
 export const fetchWithRefresh = async (url: string, options?: RequestInit) => {
   try {
-    const res = await fetch(url, options);
+    const res = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: accessTokenLocalStorage.get(),
+      } as Record<string, string>,
+      ...options,
+    });
 
     return await checkResponse(res);
   } catch (error) {
-    if (error instanceof Error && error.message === 'jwt expired') {
+    if ((error as Error).message === 'jwt expired') {
       const refreshData = await refreshToken();
 
       const headers = options?.headers
         ? new Headers(options.headers)
         : new Headers();
 
-      if (!headers.has('Authorization')) {
-        headers.set('Authorization', refreshData.accessToken);
+      if (!headers.has('authorization')) {
+        headers.set('authorization', refreshData.accessToken);
       }
 
       const res = await fetch(url, options);
