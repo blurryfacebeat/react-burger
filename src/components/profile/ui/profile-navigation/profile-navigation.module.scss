@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 120px;
+}
+
+.itemsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.subtext {
+  width: 100%;
+  opacity: 0.4;
+  color: var(--text-dark-grey);
+}

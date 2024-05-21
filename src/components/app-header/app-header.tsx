@@ -7,6 +7,7 @@ import {
 import classNames from 'classnames';
 import { NavigationLink } from '@/components';
 import { AppHeaderNavigation } from './ui';
+import { ROUTES } from '@/router';
 
 export const AppHeader: FC = () => {
   return (
@@ -15,7 +16,9 @@ export const AppHeader: FC = () => {
         <AppHeaderNavigation />
         <Logo />
         <span className={styles.profileLink}>
-          <NavigationLink Icon={ProfileIcon}>Личный кабинет</NavigationLink>
+          <NavigationLink to={ROUTES.PROFILE} Icon={ProfileIcon}>
+            Личный кабинет
+          </NavigationLink>
         </span>
       </div>
     </header>

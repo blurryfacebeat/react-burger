@@ -1,13 +1,20 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { register } from '@/api';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@/router';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { TRootState } from '@/store';
 
-export const useRegister = () => {
+export const useUpdateProfile = () => {
+  const { profile } = useSelector((state: TRootState) => state.profile);
+
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const navigate = useNavigate();
+  const [password, setPassword] = useState<string>('******');
+
+  useEffect(() => {
+    if (profile) {
+      setName(profile.name);
+      setEmail(profile.email);
+    }
+  }, [profile]);
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -23,16 +30,6 @@ export const useRegister = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-
-    try {
-      await register(email, password, name);
-      window.alert('Вы успешно зарегистрировались');
-      navigate(ROUTES.HOME);
-    } catch (error) {
-      if (error instanceof Error) {
-        window.alert(error.message);
-      }
-    }
   };
 
   return {

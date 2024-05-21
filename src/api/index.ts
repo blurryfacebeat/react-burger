@@ -8,3 +8,4 @@ export * from './register.ts';
 export * from './api.utils.ts';
 export * from './update-profile.ts';
 export * from './get-profile.ts';
+export * from './logout.ts';

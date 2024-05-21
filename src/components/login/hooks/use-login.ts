@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '@/api';
+import { ROUTES } from '@/router';
 
 export const useLogin = () => {
   const [email, setEmail] = useState<string>('');
@@ -20,7 +21,7 @@ export const useLogin = () => {
 
     try {
       await login(email, password);
-      navigate('/');
+      navigate(ROUTES.HOME);
     } catch (error) {
       if (error instanceof Error) {
         window.alert(error.message);

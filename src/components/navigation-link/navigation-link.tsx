@@ -2,6 +2,7 @@ import { FC, ComponentType, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import styles from './navigation-link.module.scss';
 import { Text } from '@/components';
+import { NavLink } from 'react-router-dom';
 
 type TIconProps = {
   type: 'primary' | 'secondary';
@@ -9,18 +10,24 @@ type TIconProps = {
 
 type TNavigationLinkProps = PropsWithChildren<{
   Icon: ComponentType<TIconProps>;
-  isActive?: boolean;
+  to: string;
 }>;
 
 export const NavigationLink: FC<TNavigationLinkProps> = ({
-  isActive,
   Icon,
+  to,
   children,
 }) => {
   return (
-    <a href="#" className={classNames(styles.navigationLink, 'p-5')}>
-      <Icon type={isActive ? 'primary' : 'secondary'} />
-      <Text textType={isActive ? 'default' : 'inactiveColor'}>{children}</Text>
-    </a>
+    <NavLink to={to} className={classNames(styles.navigationLink, 'p-5')}>
+      {({ isActive }) => (
+        <>
+          <Icon type={isActive ? 'primary' : 'secondary'} />
+          <Text textType={isActive ? 'default' : 'inactiveColor'}>
+            {children}
+          </Text>
+        </>
+      )}
+    </NavLink>
   );
 };
