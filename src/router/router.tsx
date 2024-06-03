@@ -11,18 +11,33 @@ import {
   ResetPasswordPage,
 } from '@/pages';
 import { ROUTES } from './routes.ts';
-import { ProfileInfo } from '@/components';
+import { OnlyAuth, OnlyUnAuth, ProfileInfo } from '@/components';
 
 export const RouterProvider: FC = () => {
   return (
     <Router>
       <Routes>
         <Route path={ROUTES.HOME} element={<HomePage />} />
-        <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-        <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-        <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
-        <Route path={ROUTES.RESET_PASSWORD} element={<ResetPasswordPage />} />
-        <Route path={ROUTES.PROFILE} element={<ProfilePage />}>
+        <Route
+          path={ROUTES.LOGIN}
+          element={<OnlyUnAuth component={<LoginPage />} />}
+        />
+        <Route
+          path={ROUTES.REGISTER}
+          element={<OnlyUnAuth component={<RegisterPage />} />}
+        />
+        <Route
+          path={ROUTES.FORGOT_PASSWORD}
+          element={<OnlyUnAuth component={<ForgotPasswordPage />} />}
+        />
+        <Route
+          path={ROUTES.RESET_PASSWORD}
+          element={<OnlyUnAuth component={<ResetPasswordPage />} />}
+        />
+        <Route
+          path={ROUTES.PROFILE}
+          element={<OnlyAuth component={<ProfilePage />} />}
+        >
           <Route index element={<ProfileInfo />} />
           <Route
             path={ROUTES.PROFILE_ORDERS}

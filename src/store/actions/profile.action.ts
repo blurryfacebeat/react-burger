@@ -1,23 +1,30 @@
 import { ThunkAction } from 'redux-thunk';
 import {
-  getProfileFailure,
-  getProfileStart,
-  getProfileSuccess,
+  setAuthChecked,
+  setProfileIsLoading,
+  setProfile,
   TRootState,
 } from '@/store';
 import { getProfile } from '@/api';
+import { accessTokenLocalStorage, refreshTokenLocalStorage } from '@/utils';
 
-export const getProfileAsync =
+export const checkProfileAuthAsync =
   (): ThunkAction<void, TRootState, unknown, any> => async (dispatch) => {
-    try {
-      dispatch(getProfileStart());
+    if (accessTokenLocalStorage.get()) {
+      try {
+        dispatch(setProfileIsLoading(true));
 
-      const profile = await getProfile();
+        const profile = await getProfile();
 
-      dispatch(getProfileSuccess(profile));
-    } catch (error) {
-      if (error instanceof Error) {
-        dispatch(getProfileFailure());
+        dispatch(setProfile(profile));
+      } catch (error) {
+        accessTokenLocalStorage.remove();
+        refreshTokenLocalStorage.remove();
+      } finally {
+        dispatch(setAuthChecked(true));
+        dispatch(setProfileIsLoading(false));
       }
+    } else {
+      dispatch(setAuthChecked(true));
     }
   };

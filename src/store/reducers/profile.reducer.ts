@@ -7,16 +7,18 @@ export type TProfile = {
 
 type TProfileState = {
   profile: TProfile | null;
+  isAuthChecked: boolean;
   isLoading: boolean;
 };
 
-type TGetProfilePayload = {
+type TSetProfilePayload = {
   email: string;
   name: string;
 };
 
 const initialState: TProfileState = {
   profile: null,
+  isAuthChecked: false,
   isLoading: false,
 };
 
@@ -24,21 +26,19 @@ const profileReducer = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    getProfileStart(state) {
-      state.isLoading = true;
+    setAuthChecked: (state, action: PayloadAction<boolean>) => {
+      state.isAuthChecked = action.payload;
     },
-    getProfileSuccess(state, action: PayloadAction<TGetProfilePayload>) {
-      state.isLoading = false;
+    setProfile: (state, action: PayloadAction<TSetProfilePayload | null>) => {
       state.profile = action.payload;
     },
-    getProfileFailure(state) {
-      state.isLoading = false;
-      state.profile = initialState.profile;
+    setProfileIsLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload;
     },
   },
 });
 
-export const { getProfileSuccess, getProfileFailure, getProfileStart } =
+export const { setProfileIsLoading, setProfile, setAuthChecked } =
   profileReducer.actions;
 
 export default profileReducer.reducer;

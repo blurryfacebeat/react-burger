@@ -17,3 +17,4 @@ export * from './login';
 export * from './forgot-password';
 export * from './reset-password';
 export * from './profile';
+export * from './protected-route';
