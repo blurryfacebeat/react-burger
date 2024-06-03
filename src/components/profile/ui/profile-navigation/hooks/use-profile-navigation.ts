@@ -1,10 +1,11 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ROUTES } from '@/router';
-import { logout } from '@/api';
+import { useDispatch } from 'react-redux';
+import { logoutAsync, TAppDispatch } from '@/store';
 
 export const useProfileNavigation = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  const dispatch = useDispatch<TAppDispatch>();
 
   const subtext =
     location.pathname === ROUTES.PROFILE
@@ -12,14 +13,7 @@ export const useProfileNavigation = () => {
       : 'В этом разделе вы можете просмотреть свою историю заказов';
 
   const handleExitClick = async () => {
-    try {
-      await logout();
-      navigate(ROUTES.HOME);
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message);
-      }
-    }
+    dispatch(logoutAsync());
   };
 
   return { subtext, handleExitClick };

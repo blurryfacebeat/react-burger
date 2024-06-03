@@ -1,12 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { login } from '@/api';
-import { ROUTES } from '@/router';
+import { useDispatch } from 'react-redux';
+import { loginAsync, TAppDispatch } from '@/store';
 
 export const useLogin = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const navigate = useNavigate();
+  const dispatch = useDispatch<TAppDispatch>();
 
   const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -19,14 +18,7 @@ export const useLogin = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    try {
-      await login(email, password);
-      navigate(ROUTES.HOME);
-    } catch (error) {
-      if (error instanceof Error) {
-        window.alert(error.message);
-      }
-    }
+    dispatch(loginAsync(email, password));
   };
 
   return {

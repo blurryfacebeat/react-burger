@@ -1,6 +1,6 @@
 import { fetchWithRefresh } from '@/api/api.utils.ts';
 import { MAIN_URL } from '@/api/api.constants.ts';
-import { accessTokenLocalStorage, refreshTokenLocalStorage } from '@/utils';
+import { refreshTokenLocalStorage } from '@/utils';
 
 export const logout = async () => {
   try {
@@ -11,9 +11,6 @@ export const logout = async () => {
         'Content-Type': 'application/json',
       },
     });
-
-    refreshTokenLocalStorage.remove();
-    accessTokenLocalStorage.remove();
   } catch {
     throw new Error('Ошибка при выходе');
   }

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { TRootState } from '@/store';
 import { Navigate, useLocation } from 'react-router-dom';
 import { ROUTES } from '@/router';
+import { BurgerLoader } from '@/components';
 
 type TProtectedRouteProps = {
   component: ReactNode;
@@ -24,7 +25,7 @@ const ProtectedRoute: FC<TProtectedRouteProps> = ({
   const location = useLocation();
 
   if (!isAuthChecked) {
-    return <p>Loading...</p>;
+    return <BurgerLoader />;
   }
 
   if (onlyUnAuth && !!profile) {

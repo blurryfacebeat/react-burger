@@ -1,9 +1,24 @@
 import { MAIN_URL } from '@/api/api.constants.ts';
 import { checkResponse } from './api.utils.ts';
 
-export const login = async (email: string, password: string) => {
+type TUser = {
+  email: string;
+  name: string;
+};
+
+type TResponse = {
+  accessToken: string;
+  refreshToken: string;
+  success: boolean;
+  user: TUser;
+};
+
+export const login = async (
+  email: string,
+  password: string,
+): Promise<Omit<TResponse, 'success'>> => {
   try {
-    await fetch(`${MAIN_URL}/api/auth/login`, {
+    const response: TResponse = await fetch(`${MAIN_URL}/api/auth/login`, {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: {
@@ -11,7 +26,13 @@ export const login = async (email: string, password: string) => {
       },
     }).then(checkResponse);
 
-    return true;
+    const { accessToken, refreshToken, user } = response;
+
+    return {
+      accessToken,
+      refreshToken,
+      user,
+    };
   } catch {
     throw new Error('Ошибка при восстановлении пароля');
   }
