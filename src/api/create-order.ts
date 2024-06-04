@@ -1,5 +1,5 @@
 import { MAIN_URL } from './api.constants.ts';
-import { checkResponse, fetchWithRefresh } from './api.utils.ts';
+import { fetchWithRefresh } from './api.utils.ts';
 
 type TResponse = {
   success: boolean;
@@ -16,11 +16,8 @@ export const createOrder = async (ingredients: string[]) => {
       {
         method: 'POST',
         body: JSON.stringify({ ingredients }),
-        headers: {
-          'Content-Type': 'application/json',
-        } as Record<string, string>,
       },
-    ).then(checkResponse);
+    );
 
     const { name, order } = response;
 

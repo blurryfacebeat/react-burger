@@ -34,6 +34,6 @@ export const login = async (
       user,
     };
   } catch {
-    throw new Error('Ошибка при восстановлении пароля');
+    throw new Error('Ошибка при логине');
   }
 };

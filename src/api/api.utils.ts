@@ -30,14 +30,22 @@ export const refreshToken = async () => {
     });
 };
 
-export const fetchWithRefresh = async (url: string, options?: RequestInit) => {
+export const fetchWithRefresh = async (
+  url: string,
+  options: RequestInit = {},
+) => {
   try {
+    const { headers: optionsHeaders, ...otherOptions } = options;
+
+    const headers = {
+      'Content-Type': 'application/json;charset=utf-8',
+      authorization: accessTokenLocalStorage.get(),
+      ...optionsHeaders,
+    } as Record<string, string>;
+
     const res = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: accessTokenLocalStorage.get(),
-      } as Record<string, string>,
-      ...options,
+      headers,
+      ...otherOptions,
     });
 
     return await checkResponse(res);
