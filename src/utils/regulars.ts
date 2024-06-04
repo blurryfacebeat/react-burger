@@ -2,7 +2,7 @@ export const EMAIL_REGULAR = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 export const isCorrectedEmail = (email: string) => {
   if (!EMAIL_REGULAR.test(email)) {
-    window.alert('Введите корректный формат email');
+    alert('Введите корректный формат email');
 
     return false;
   }

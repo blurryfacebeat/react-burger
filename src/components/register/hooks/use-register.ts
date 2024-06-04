@@ -26,11 +26,11 @@ export const useRegister = () => {
 
     try {
       await register(email, password, name);
-      window.alert('Вы успешно зарегистрировались');
+      alert('Вы успешно зарегистрировались');
       navigate(ROUTES.HOME);
     } catch (error) {
       if (error instanceof Error) {
-        window.alert(error.message);
+        alert(error.message);
       }
     }
   };

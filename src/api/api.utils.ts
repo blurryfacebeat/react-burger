@@ -49,11 +49,9 @@ export const fetchWithRefresh = async (url: string, options?: RequestInit) => {
         ? new Headers(options.headers)
         : new Headers();
 
-      if (!headers.has('authorization')) {
-        headers.set('authorization', refreshData.accessToken);
-      }
+      headers.set('authorization', refreshData.accessToken);
 
-      const res = await fetch(url, options);
+      const res = await fetch(url, { ...options, headers });
 
       return await checkResponse(res);
     }

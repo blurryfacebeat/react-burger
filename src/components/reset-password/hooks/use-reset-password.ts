@@ -22,12 +22,12 @@ export const useResetPassword = () => {
 
     try {
       await confirmResetPassword(password, code);
-      window.alert('Пароль успешно изменен');
+      alert('Пароль успешно изменен');
       recoverPasswordActiveLocalStorage.remove();
       navigate(ROUTES.LOGIN);
     } catch (error) {
       if (error instanceof Error) {
-        window.alert(error.message);
+        alert(error.message);
       }
     }
   };

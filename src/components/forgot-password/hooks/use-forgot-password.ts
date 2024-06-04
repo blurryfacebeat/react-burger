@@ -22,7 +22,7 @@ export const useForgotPassword = () => {
         navigate(ROUTES.RESET_PASSWORD);
       } catch (error) {
         if (error instanceof Error) {
-          window.alert(error.message);
+          alert(error.message);
         }
       }
     }

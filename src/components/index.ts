@@ -19,3 +19,4 @@ export * from './reset-password';
 export * from './profile';
 export * from './protected-route';
 export * from './burger-loader';
+export * from './profile-input';
