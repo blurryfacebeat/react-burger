@@ -4,7 +4,7 @@ import styles from './forgot-password.module.scss';
 import { BaseLink, MainLayout, Text } from '@/components';
 import {
   Button,
-  Input,
+  EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import classNames from 'classnames';
 import { ROUTES } from '@/router';
@@ -19,10 +19,8 @@ export const ForgotPassword: FC = () => {
           Восстановление пароля
         </Text>
         <div className="mb-6">
-          {/* @ts-expect-error */}
-          <Input
+          <EmailInput
             placeholder="Укажите e-mail"
-            type="email"
             value={email}
             onChange={handleChangeEmail}
           />

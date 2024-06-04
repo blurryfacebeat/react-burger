@@ -1,5 +1,8 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+  EmailInput,
+  Input,
+} from '@ya.praktikum/react-developer-burger-ui-components';
 
 type TProfileInputProps = {
   type: 'password' | 'email' | 'text';
@@ -42,18 +45,34 @@ export const ProfileInput: FC<TProfileInputProps> = ({
 
   return (
     <>
-      {/*В Input'ах указан ts-expect-error, так как это ошибка типов внутри библиотеки, это не моя вина */}
-      {/* @ts-expect-error */}
-      <Input
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        ref={targetRef}
-        disabled={!isEdit}
-        icon={isEdit ? 'CloseIcon' : 'EditIcon'}
-        onChange={(event) => onChange(event.target.value)}
-        onIconClick={handleIconClick}
-      />
+      {type === 'email' ? (
+        <>
+          <EmailInput
+            placeholder={placeholder}
+            value={value}
+            disabled={!isEdit}
+            /* @ts-ignore - здесь ts-ignore по причине ошибки в вашем UI-ките, не моя вина */
+            icon={isEdit ? 'CloseIcon' : 'EditIcon'}
+            onChange={(event) => onChange(event.target.value)}
+            onIconClick={handleIconClick}
+          />
+        </>
+      ) : (
+        <>
+          {/*В Input'ах указан ts-expect-error, так как это ошибка типов внутри библиотеки, это не моя вина */}
+          {/* @ts-expect-error */}
+          <Input
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            ref={targetRef}
+            disabled={!isEdit}
+            icon={isEdit ? 'CloseIcon' : 'EditIcon'}
+            onChange={(event) => onChange(event.target.value)}
+            onIconClick={handleIconClick}
+          />
+        </>
+      )}
     </>
   );
 };

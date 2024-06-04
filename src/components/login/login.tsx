@@ -4,7 +4,7 @@ import { BaseLink, MainLayout, Text } from '@/components';
 import classNames from 'classnames';
 import {
   Button,
-  Input,
+  EmailInput,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './login.module.scss';
@@ -26,10 +26,8 @@ export const Login: FC = () => {
           Вход
         </Text>
         <div className={classNames(styles.fields, 'mb-6')}>
-          {/* @ts-expect-error */}
-          <Input
+          <EmailInput
             placeholder="E-mail"
-            type="email"
             value={email}
             onChange={handleChangeEmail}
           />

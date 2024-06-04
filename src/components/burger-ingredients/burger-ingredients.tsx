@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { Tabs, Text } from '@/components';
 import styles from './burger-ingredients.module.scss';
 import classNames from 'classnames';
-import { useBurgerIngredientsTabs, useBurgerIngredientsModal } from './hooks';
+import { useBurgerIngredientsTabs } from './hooks';
 import { BurgerIngredientsItems } from './ui';
 import { TIngredientItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
@@ -35,8 +35,6 @@ export const BurgerIngredients: FC = () => {
     data: mappedData,
   });
 
-  const { handleItemClick } = useBurgerIngredientsModal();
-
   return (
     <div className={classNames(styles.burgerIngredients, 'mt-10')}>
       <Text textType="large" className="mb-5">
@@ -51,7 +49,6 @@ export const BurgerIngredients: FC = () => {
       />
       <BurgerIngredientsItems
         data={mappedData}
-        onItemClick={handleItemClick}
         onSetActiveTab={handleSetCurrentTab}
       />
     </div>

@@ -4,6 +4,7 @@ import styles from './register.module.scss';
 import { useRegister } from './hooks';
 import {
   Button,
+  EmailInput,
   Input,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -28,6 +29,7 @@ export const Register: FC = () => {
           Регистрация
         </Text>
         <div className={classNames(styles.fields, 'mb-6')}>
+          {/*В Input'ах указан ts-expect-error, так как это ошибка типов внутри библиотеки, это не моя вина */}
           {/* @ts-expect-error */}
           <Input
             placeholder="Имя"
@@ -35,10 +37,8 @@ export const Register: FC = () => {
             value={name}
             onChange={handleChangeName}
           />
-          {/* @ts-expect-error */}
-          <Input
+          <EmailInput
             placeholder="E-mail"
-            type="email"
             value={email}
             onChange={handleChangeEmail}
           />

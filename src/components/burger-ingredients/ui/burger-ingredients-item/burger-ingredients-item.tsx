@@ -12,12 +12,10 @@ import { ROUTES } from '@/router';
 
 type TBurgerIngredientsItemProps = {
   item: TIngredientItem;
-  onClick: () => void;
 };
 
 export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
   item,
-  onClick,
 }) => {
   const location = useLocation();
 
@@ -50,7 +48,6 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
         className={styles.burgerIngredientsItem}
         to={`${ROUTES.INGREDIENTS}/${item._id}`}
         state={{ background: location }}
-        onClick={onClick}
       >
         {!!count && <Counter count={count} size="default" />}
         <img src={item.image} alt="burger ingredient" />

@@ -31,6 +31,7 @@ export const ResetPassword: FC = () => {
             value={password}
             onChange={handleChangePassword}
           />
+          {/*В Input'ах указан ts-expect-error, так как это ошибка типов внутри библиотеки, это не моя вина */}
           {/* @ts-expect-error */}
           <Input
             placeholder="Введите код из письма"
