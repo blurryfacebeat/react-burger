@@ -20,3 +20,6 @@ class BaseLocalStorage {
 
 export const accessTokenLocalStorage = new BaseLocalStorage('accessToken');
 export const refreshTokenLocalStorage = new BaseLocalStorage('refreshToken');
+export const recoverPasswordActiveLocalStorage = new BaseLocalStorage(
+  'recoverPasswordActive',
+);

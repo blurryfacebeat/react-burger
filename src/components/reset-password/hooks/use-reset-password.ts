@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { confirmResetPassword } from '@/api';
 import { ROUTES } from '@/router';
+import { recoverPasswordActiveLocalStorage } from '@/utils';
 
 export const useResetPassword = () => {
   const [code, setCode] = useState<string>('');
@@ -22,6 +23,7 @@ export const useResetPassword = () => {
     try {
       await confirmResetPassword(password, code);
       window.alert('Пароль успешно изменен');
+      recoverPasswordActiveLocalStorage.remove();
       navigate(ROUTES.LOGIN);
     } catch (error) {
       if (error instanceof Error) {
@@ -29,6 +31,12 @@ export const useResetPassword = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (!recoverPasswordActiveLocalStorage.get()) {
+      navigate(ROUTES.FORGOT_PASSWORD);
+    }
+  }, [navigate]);
 
   return {
     code,
