@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { RouterProvider } from '@/router';
+import { RouterProvider, RoutesProvider } from '@/router';
 import { useDispatch } from 'react-redux';
 import { checkProfileAuthAsync, TAppDispatch } from '@/store';
 
@@ -10,5 +10,9 @@ export const App: FC = () => {
     dispatch(checkProfileAuthAsync());
   }, [dispatch]);
 
-  return <RouterProvider />;
+  return (
+    <RouterProvider>
+      <RoutesProvider />
+    </RouterProvider>
+  );
 };

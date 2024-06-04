@@ -1,8 +1,9 @@
-import { FC } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { ROUTES } from '@/router/routes.ts';
 import {
   ForgotPasswordPage,
   HomePage,
+  IngredientsDetailsPage,
   LoginPage,
   NotFoundPage,
   OrdersListPage,
@@ -10,13 +11,20 @@ import {
   RegisterPage,
   ResetPasswordPage,
 } from '@/pages';
-import { ROUTES } from './routes.ts';
-import { OnlyAuth, OnlyUnAuth, ProfileInfo } from '@/components';
+import {
+  BurgerIngredientsModal,
+  OnlyAuth,
+  OnlyUnAuth,
+  ProfileInfo,
+} from '@/components';
 
-export const RouterProvider: FC = () => {
+export const RoutesProvider = () => {
+  const location = useLocation();
+  const background = location.state?.background;
+
   return (
-    <Router>
-      <Routes>
+    <>
+      <Routes location={background || location}>
         <Route path={ROUTES.HOME} element={<HomePage />} />
         <Route
           path={ROUTES.LOGIN}
@@ -45,9 +53,20 @@ export const RouterProvider: FC = () => {
           />
         </Route>
         <Route path={ROUTES.ORDERS_LIST} element={<OrdersListPage />} />
-        <Route path={`${ROUTES.INGREDIENTS}/:id`} element={<HomePage />} />
+        <Route
+          path={`${ROUTES.INGREDIENTS}/:ingredientId`}
+          element={<IngredientsDetailsPage />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </Router>
+      {!!background && (
+        <Routes>
+          <Route
+            path={`${ROUTES.INGREDIENTS}/:ingredientId`}
+            element={<BurgerIngredientsModal />}
+          />
+        </Routes>
+      )}
+    </>
   );
 };

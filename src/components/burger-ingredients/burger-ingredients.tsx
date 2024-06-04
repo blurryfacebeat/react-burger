@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
-import { Modal, Tabs, Text } from '@/components';
+import { Tabs, Text } from '@/components';
 import styles from './burger-ingredients.module.scss';
 import classNames from 'classnames';
 import { useBurgerIngredientsTabs, useBurgerIngredientsModal } from './hooks';
-import { BurgerIngredientsDetails, BurgerIngredientsItems } from './ui';
+import { BurgerIngredientsItems } from './ui';
 import { TIngredientItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
 import { useSelector } from 'react-redux';
@@ -35,8 +35,7 @@ export const BurgerIngredients: FC = () => {
     data: mappedData,
   });
 
-  const { isModalOpen, handleModalClose, handleItemClick } =
-    useBurgerIngredientsModal();
+  const { handleItemClick } = useBurgerIngredientsModal();
 
   return (
     <div className={classNames(styles.burgerIngredients, 'mt-10')}>
@@ -55,15 +54,6 @@ export const BurgerIngredients: FC = () => {
         onItemClick={handleItemClick}
         onSetActiveTab={handleSetCurrentTab}
       />
-      {isModalOpen && (
-        <Modal
-          className={classNames(styles.burgerIngredientsModal, 'pb-15')}
-          title="Детали ингредиента"
-          onClose={handleModalClose}
-        >
-          <BurgerIngredientsDetails />
-        </Modal>
-      )}
     </div>
   );
 };

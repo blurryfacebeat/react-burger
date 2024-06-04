@@ -4,15 +4,25 @@ import {
   fetchIngredientsStart,
   fetchIngredientsSuccess,
   fetchIngredientsFailure,
+  setSelectedIngredient,
 } from '@/store';
 import { getIngredients } from '@/api';
 
 export const fetchIngredientsAsync =
-  (): ThunkAction<void, TRootState, unknown, any> => async (dispatch) => {
+  (activeIngredient?: string): ThunkAction<void, TRootState, unknown, any> =>
+  async (dispatch) => {
     try {
       dispatch(fetchIngredientsStart());
 
       const ingredients = await getIngredients();
+
+      const selectedIngredientItem = ingredients?.find(
+        (item) => item._id === activeIngredient,
+      );
+
+      if (activeIngredient && selectedIngredientItem) {
+        dispatch(setSelectedIngredient(selectedIngredientItem));
+      }
 
       dispatch(fetchIngredientsSuccess(ingredients));
     } catch (error) {

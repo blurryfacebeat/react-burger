@@ -1,2 +1,3 @@
 export { ROUTES } from './routes.ts';
-export { RouterProvider } from './router.tsx';
+export { RoutesProvider } from './routes-provider.tsx';
+export { RouterProvider } from './router-provider.tsx';

@@ -1,5 +1,6 @@
 import { FC } from 'react';
+import { MainLayout } from '@/components';
 
 export const NotFoundPage: FC = () => {
-  return <div>Not Found</div>;
+  return <MainLayout>Not Found</MainLayout>;
 };
