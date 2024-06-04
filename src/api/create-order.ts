@@ -1,5 +1,6 @@
 import { MAIN_URL } from './api.constants.ts';
 import { checkResponse } from './api.utils.ts';
+import { accessTokenLocalStorage } from '@/utils';
 
 type TResponse = {
   success: boolean;
@@ -16,7 +17,8 @@ export const createOrder = async (ingredients: string[]) => {
       body: JSON.stringify({ ingredients }),
       headers: {
         'Content-Type': 'application/json',
-      },
+        authorization: accessTokenLocalStorage.get(),
+      } as Record<string, string>,
     }).then(checkResponse);
 
     const { name, order } = response;

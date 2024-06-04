@@ -15,8 +15,13 @@ import {
 } from './hooks';
 import { useDispatch } from 'react-redux';
 import { TAppDispatch, createOrderAsync } from '@/store';
+import { accessTokenLocalStorage } from '@/utils';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/router';
 
 export const BurgerConstructor: FC = () => {
+  const navigate = useNavigate();
+
   const { isModalOpen, handleModalClose } = useBurgerConstructorModal();
 
   const { bun, total, ingredients } = useBurgerConstructorState();
@@ -25,7 +30,11 @@ export const BurgerConstructor: FC = () => {
 
   const dispatch = useDispatch<TAppDispatch>();
   const createOrder = () => {
-    dispatch(createOrderAsync());
+    if (accessTokenLocalStorage.get()) {
+      dispatch(createOrderAsync());
+    } else {
+      navigate(ROUTES.LOGIN);
+    }
   };
 
   return (
