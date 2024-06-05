@@ -71,7 +71,7 @@ export const useBurgerConstructorItemDnd = ({
     item: () => {
       return { id, index };
     },
-    collect: (monitor: any) => ({
+    collect: (monitor: { isDragging: () => boolean }) => ({
       isDragging: monitor.isDragging(),
     }),
     canDrag: isDraggable,
