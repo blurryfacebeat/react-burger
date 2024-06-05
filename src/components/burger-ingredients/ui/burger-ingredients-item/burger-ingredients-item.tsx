@@ -7,16 +7,18 @@ import { TIngredientItem } from '@/api';
 import { useBurgerIngredientsItemDnd } from './hooks';
 import { useSelector } from 'react-redux';
 import { TRootState } from '@/store';
+import { Link, useLocation } from 'react-router-dom';
+import { ROUTES } from '@/router';
 
 type TBurgerIngredientsItemProps = {
   item: TIngredientItem;
-  onClick: () => void;
 };
 
 export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
   item,
-  onClick,
 }) => {
+  const location = useLocation();
+
   const ingredients = useSelector(
     (state: TRootState) =>
       state.burgerConstructor.burgerConstructor.ingredients,
@@ -39,17 +41,19 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
 
   return (
     <li
-      className={classNames(
-        styles.burgerIngredientsItem,
-        isDragging && styles.burgerIngredientsItemAnimated,
-      )}
+      className={classNames(isDragging && styles.burgerIngredientsItemAnimated)}
       ref={drag}
-      onClick={onClick}
     >
-      {!!count && <Counter count={count} size="default" />}
-      <img src={item.image} alt="burger ingredient" />
-      <Price>{item.price}</Price>
-      <Text>{item.name}</Text>
+      <Link
+        className={styles.burgerIngredientsItem}
+        to={`${ROUTES.INGREDIENTS}/${item._id}`}
+        state={{ background: location }}
+      >
+        {!!count && <Counter count={count} size="default" />}
+        <img src={item.image} alt="burger ingredient" />
+        <Price>{item.price}</Price>
+        <Text>{item.name}</Text>
+      </Link>
     </li>
   );
 };

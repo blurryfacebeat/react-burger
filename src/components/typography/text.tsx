@@ -14,12 +14,14 @@ type TTextType =
 type TTextProps = PropsWithChildren<{
   textType?: TTextType;
   className?: string;
+  onClick?: () => void;
 }>;
 
 export const Text: FC<TTextProps> = ({
   children,
   className,
   textType = 'default',
+  onClick,
 }) => {
   const getTextTypeClass = () => {
     switch (textType) {
@@ -43,7 +45,10 @@ export const Text: FC<TTextProps> = ({
   };
 
   return (
-    <p className={classNames('text', getTextTypeClass(), className)}>
+    <p
+      className={classNames('text', getTextTypeClass(), className)}
+      onClick={onClick}
+    >
       {children}
     </p>
   );

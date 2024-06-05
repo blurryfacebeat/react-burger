@@ -29,7 +29,7 @@ export const createOrderAsync =
     } catch (error) {
       if (error instanceof Error) {
         dispatch(addCurrentOrderFailure());
-        window.alert(error.message);
+        alert(error.message);
       }
     }
   };

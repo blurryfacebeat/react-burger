@@ -1,5 +1,5 @@
 import { MAIN_URL } from './api.constants.ts';
-import { checkResponse } from '@/utils';
+import { fetchWithRefresh } from './api.utils.ts';
 
 type TResponse = {
   success: boolean;
@@ -11,18 +11,18 @@ type TResponse = {
 
 export const createOrder = async (ingredients: string[]) => {
   try {
-    const response: TResponse = await fetch(`${MAIN_URL}/api/orders`, {
-      method: 'POST',
-      body: JSON.stringify({ ingredients }),
-      headers: {
-        'Content-Type': 'application/json',
+    const response: TResponse = await fetchWithRefresh(
+      `${MAIN_URL}/api/orders`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ ingredients }),
       },
-    }).then(checkResponse);
+    );
 
     const { name, order } = response;
 
     return { name, number: order.number };
-  } catch (error) {
+  } catch {
     throw new Error('Ошибка при создании заказа');
   }
 };

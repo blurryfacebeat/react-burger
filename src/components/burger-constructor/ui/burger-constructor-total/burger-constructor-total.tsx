@@ -43,7 +43,7 @@ export const BurgerConstructorTotal: FC<TBurgerConstructorTotalProps> = ({
         htmlType="submit"
         onClick={onClick}
       >
-        Оформить заказ
+        {isOrderCreateLoading ? 'Загрузка...' : 'Оформить заказ'}
       </Button>
     </div>
   );

@@ -1,5 +1,5 @@
 import { MAIN_URL } from '@/api/api.constants.ts';
-import { checkResponse } from '@/utils';
+import { checkResponse } from './api.utils.ts';
 
 export type TIngredientItem = {
   _id: string;
@@ -29,7 +29,7 @@ export const getIngredients = async (): Promise<TIngredientItem[]> => {
     const { data } = response;
 
     return data;
-  } catch (error) {
+  } catch {
     throw new Error('Ошибка при загрузке ингредиентов');
   }
 };

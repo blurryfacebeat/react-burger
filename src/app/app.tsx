@@ -1,31 +1,23 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { RouterProvider, RoutesProvider } from '@/router';
+import { useDispatch } from 'react-redux';
 import {
-  BurgerConstructor,
-  BurgerIngredients,
-  ErrorPlaceholder,
-  Loader,
-  MainLayout,
-} from '@/components';
-import styles from './app.module.scss';
-import { useIngredients } from './hooks';
+  checkProfileAuthAsync,
+  fetchIngredientsAsync,
+  TAppDispatch,
+} from '@/store';
 
 export const App: FC = () => {
-  const { isError, errorMessage, isLoading } = useIngredients();
+  const dispatch = useDispatch<TAppDispatch>();
+
+  useEffect(() => {
+    dispatch(checkProfileAuthAsync());
+    dispatch(fetchIngredientsAsync());
+  }, [dispatch]);
 
   return (
-    <MainLayout>
-      <section className={styles.app}>
-        {isLoading ? (
-          <Loader />
-        ) : isError ? (
-          <ErrorPlaceholder text={errorMessage as string} />
-        ) : (
-          <>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </>
-        )}
-      </section>
-    </MainLayout>
+    <RouterProvider>
+      <RoutesProvider />
+    </RouterProvider>
   );
 };

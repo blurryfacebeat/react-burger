@@ -11,13 +11,11 @@ import { useBurgerIngredientsItemsScroll } from './hooks';
 
 type TBurgerIngredientsItemsProps = {
   data: Record<string, TIngredientItem[]>;
-  onItemClick: (item: TIngredientItem) => void;
   onSetActiveTab: (value: string) => void;
 };
 
 export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
   data,
-  onItemClick,
   onSetActiveTab,
 }) => {
   const { handleScrollCapture } = useBurgerIngredientsItemsScroll({
@@ -37,11 +35,7 @@ export const BurgerIngredientsItems: FC<TBurgerIngredientsItemsProps> = ({
             anchorTag={BURGER_INGREDIENTS_ANCHOR_TAG}
           >
             {value.map((item) => (
-              <BurgerIngredientsItem
-                key={item._id}
-                item={item}
-                onClick={() => onItemClick(item)}
-              />
+              <BurgerIngredientsItem key={item._id} item={item} />
             ))}
           </BurgerIngredientsCategory>
         ))}
