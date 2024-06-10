@@ -6,8 +6,7 @@ import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useCustomSelector } from '@/store';
 
 type TBurgerConstructorTotalProps = {
   value: number;
@@ -18,13 +17,15 @@ export const BurgerConstructorTotal: FC<TBurgerConstructorTotalProps> = ({
   value,
   onClick,
 }) => {
-  const isOrderCreateLoading = useSelector(
-    (state: TRootState) => state.currentOrder.isLoading,
-  );
+  const {
+    storeState: { isLoading: isOrderCreateLoading },
+  } = useCustomSelector<'currentOrder'>('currentOrder');
 
-  const bun = useSelector(
-    (state: TRootState) => state.burgerConstructor.burgerConstructor.bun,
-  );
+  const {
+    storeState: {
+      burgerConstructor: { bun },
+    },
+  } = useCustomSelector<'burgerConstructor'>('burgerConstructor');
 
   const isButtonDisabled = !value || !bun || isOrderCreateLoading;
 

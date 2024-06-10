@@ -1,14 +1,13 @@
 import { FC, useEffect } from 'react';
 import { RouterProvider, RoutesProvider } from '@/router';
-import { useDispatch } from 'react-redux';
 import {
   checkProfileAuthAsync,
   fetchIngredientsAsync,
-  TAppDispatch,
+  useCustomDispatch,
 } from '@/store';
 
 export const App: FC = () => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const { dispatch } = useCustomDispatch();
 
   useEffect(() => {
     dispatch(checkProfileAuthAsync());

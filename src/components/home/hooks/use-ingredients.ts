@@ -1,13 +1,10 @@
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useCustomSelector } from '@/store';
 
 export const useIngredients = () => {
-  const isLoading = useSelector(
-    (state: TRootState) => state.ingredients.isLoading,
-  );
-  const errorMessage = useSelector(
-    (state: TRootState) => state.ingredients.errorMessage,
-  );
+  const {
+    storeState: { isLoading, errorMessage },
+  } = useCustomSelector<'ingredients'>('ingredients');
+
   const isError = !!errorMessage;
 
   return { isLoading, isError, errorMessage };

@@ -6,10 +6,11 @@ import {
   fetchIngredientsFailure,
 } from '@/store';
 import { getIngredients } from '@/api';
-import { Action } from 'redux';
+import { UnknownAction } from 'redux';
 
 export const fetchIngredientsAsync =
-  (): ThunkAction<void, TRootState, unknown, Action> => async (dispatch) => {
+  (): ThunkAction<void, TRootState, unknown, UnknownAction> =>
+  async (dispatch) => {
     try {
       dispatch(fetchIngredientsStart());
 

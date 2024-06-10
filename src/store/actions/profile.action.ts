@@ -7,13 +7,13 @@ import {
 } from '@/store';
 import { getProfile, login, logout } from '@/api';
 import { accessTokenLocalStorage, refreshTokenLocalStorage } from '@/utils';
-import { Action } from 'redux';
+import { UnknownAction } from 'redux';
 
 export const loginAsync =
   (
     email: string,
     password: string,
-  ): ThunkAction<void, TRootState, unknown, Action> =>
+  ): ThunkAction<void, TRootState, unknown, UnknownAction> =>
   async (dispatch) => {
     try {
       const response = await login(email, password);
@@ -31,7 +31,8 @@ export const loginAsync =
   };
 
 export const checkProfileAuthAsync =
-  (): ThunkAction<void, TRootState, unknown, Action> => async (dispatch) => {
+  (): ThunkAction<void, TRootState, unknown, UnknownAction> =>
+  async (dispatch) => {
     if (!accessTokenLocalStorage.get()) {
       dispatch(setAuthChecked(true));
       return;
@@ -53,7 +54,8 @@ export const checkProfileAuthAsync =
   };
 
 export const logoutAsync =
-  (): ThunkAction<void, TRootState, unknown, Action> => async (dispatch) => {
+  (): ThunkAction<void, TRootState, unknown, UnknownAction> =>
+  async (dispatch) => {
     try {
       await logout();
 

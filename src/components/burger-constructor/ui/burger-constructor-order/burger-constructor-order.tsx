@@ -3,13 +3,12 @@ import classNames from 'classnames';
 import { Text } from '@/components';
 import styles from './burger-constructor-order.module.scss';
 import doneIcon from '@/assets/images/done-icon.svg';
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useCustomSelector } from '@/store';
 
 export const BurgerConstructorOrder: FC = () => {
-  const orderNumber = useSelector(
-    (state: TRootState) => state.currentOrder.order?.number,
-  );
+  const {
+    storeState: { order },
+  } = useCustomSelector<'currentOrder'>('currentOrder');
 
   return (
     <div className={classNames(styles.content, 'pt-20')}>
@@ -17,7 +16,7 @@ export const BurgerConstructorOrder: FC = () => {
         className={classNames(styles.orderNumber, 'mb-8')}
         textType="digitsLarge"
       >
-        {orderNumber}
+        {order?.number}
       </Text>
       <Text className="mb-15" textType="medium">
         идентификатор заказа

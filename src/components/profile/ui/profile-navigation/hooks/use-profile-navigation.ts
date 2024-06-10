@@ -1,11 +1,10 @@
 import { useLocation } from 'react-router-dom';
 import { ROUTES } from '@/router';
-import { useDispatch } from 'react-redux';
-import { logoutAsync, TAppDispatch } from '@/store';
+import { logoutAsync, useCustomDispatch } from '@/store';
 
 export const useProfileNavigation = () => {
   const location = useLocation();
-  const dispatch = useDispatch<TAppDispatch>();
+  const { dispatch } = useCustomDispatch();
 
   const subtext =
     location.pathname === ROUTES.PROFILE

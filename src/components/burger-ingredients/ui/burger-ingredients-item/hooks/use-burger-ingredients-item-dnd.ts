@@ -1,7 +1,6 @@
 import { useDrag } from 'react-dnd';
 import { BURGER_INGREDIENT_DRAG_AND_DROP_NAME } from '@/components';
-import { addIngredientToConstructor, TAppDispatch } from '@/store';
-import { useDispatch } from 'react-redux';
+import { addIngredientToConstructor, useCustomDispatch } from '@/store';
 import { TIngredientItem } from '@/api';
 
 type TUseBurgerIngredientsItemDndProps = {
@@ -15,7 +14,7 @@ type TDropResult = {
 export const useBurgerIngredientsItemDnd = ({
   item,
 }: TUseBurgerIngredientsItemDndProps) => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const { dispatch } = useCustomDispatch();
 
   const [{ isDragging }, drag] = useDrag(() => ({
     item,
