@@ -1,6 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useCustomSelector } from '@/store';
 import { Navigate, useLocation } from 'react-router-dom';
 import { ROUTES } from '@/router';
 import { BurgerLoader } from '@/components';
@@ -18,10 +17,9 @@ const ProtectedRoute: FC<TProtectedRouteProps> = ({
   component,
   onlyUnAuth,
 }) => {
-  const isAuthChecked = useSelector(
-    (state: TRootState) => state.profile.isAuthChecked,
-  );
-  const profile = useSelector((state: TRootState) => state.profile.profile);
+  const {
+    storeState: { isAuthChecked, profile },
+  } = useCustomSelector<'profile'>('profile');
   const location = useLocation();
 
   if (!isAuthChecked) {

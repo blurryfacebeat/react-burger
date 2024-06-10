@@ -1,16 +1,12 @@
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useCustomSelector } from '@/store';
 import { useMemo } from 'react';
 
 export const useBurgerConstructorState = () => {
-  const ingredients = useSelector(
-    (state: TRootState) =>
-      state.burgerConstructor.burgerConstructor.ingredients,
-  );
-
-  const bun = useSelector(
-    (state: TRootState) => state.burgerConstructor.burgerConstructor.bun,
-  );
+  const {
+    storeState: {
+      burgerConstructor: { ingredients, bun },
+    },
+  } = useCustomSelector<'burgerConstructor'>('burgerConstructor');
 
   const total = useMemo(
     () =>

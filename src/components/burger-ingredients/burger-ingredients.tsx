@@ -6,13 +6,12 @@ import { useBurgerIngredientsTabs } from './hooks';
 import { BurgerIngredientsItems } from './ui';
 import { TIngredientItem } from '@/api';
 import { BURGER_INGREDIENTS_ANCHOR_TAG } from '@/components/burger-ingredients/burger-ingredients.constants.ts';
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useCustomSelector } from '@/store';
 
 export const BurgerIngredients: FC = () => {
-  const ingredients = useSelector(
-    (state: TRootState) => state.ingredients.ingredients,
-  );
+  const {
+    storeState: { ingredients },
+  } = useCustomSelector<'ingredients'>('ingredients');
 
   const mappedData = useMemo(
     () =>

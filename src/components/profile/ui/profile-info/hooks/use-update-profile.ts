@@ -1,12 +1,13 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setProfile, TAppDispatch, TRootState } from '@/store';
+import { setProfile, useCustomDispatch, useCustomSelector } from '@/store';
 import { updateProfile } from '@/api';
 import { isCorrectedEmail } from '@/utils';
 
 export const useUpdateProfile = () => {
-  const { profile } = useSelector((state: TRootState) => state.profile);
-  const dispatch = useDispatch<TAppDispatch>();
+  const {
+    storeState: { profile },
+  } = useCustomSelector<'profile'>('profile');
+  const { dispatch } = useCustomDispatch();
 
   const oldPassword = useRef<string>('');
 

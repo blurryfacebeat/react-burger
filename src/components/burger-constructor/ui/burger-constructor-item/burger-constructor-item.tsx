@@ -5,8 +5,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import classNames from 'classnames';
 import styles from './burger-constructor-item.module.scss';
-import { useDispatch } from 'react-redux';
-import { removeIngredientFromConstructor, TAppDispatch } from '@/store';
+import { removeIngredientFromConstructor, useCustomDispatch } from '@/store';
 import { useBurgerConstructorItemDnd } from './hooks';
 
 type TBurgerConstructorItemProps = {
@@ -34,7 +33,7 @@ export const BurgerConstructorItem: FC<TBurgerConstructorItemProps> = ({
   className,
   onMoveCard,
 }) => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const { dispatch } = useCustomDispatch();
 
   const handleClose = () => {
     dispatch(removeIngredientFromConstructor(id));

@@ -1,10 +1,12 @@
 import { useDrop } from 'react-dnd';
 import { BURGER_INGREDIENT_DRAG_AND_DROP_NAME } from '@/components';
-import { swipeIngredientsInBurgerConstructor, TAppDispatch } from '@/store';
-import { useDispatch } from 'react-redux';
+import {
+  swipeIngredientsInBurgerConstructor,
+  useCustomDispatch,
+} from '@/store';
 
 export const useBurgerConstructorDnd = () => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const { dispatch } = useCustomDispatch();
 
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: BURGER_INGREDIENT_DRAG_AND_DROP_NAME,

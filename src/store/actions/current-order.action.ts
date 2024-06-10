@@ -6,10 +6,11 @@ import {
   TRootState,
 } from '@/store';
 import { createOrder } from '@/api';
+import { UnknownAction } from 'redux';
 
 // TODO Попробовать createAsyncThunk вместо стандартный Thunk Actions
 export const createOrderAsync =
-  (): ThunkAction<void, TRootState, unknown, any> =>
+  (): ThunkAction<void, TRootState, unknown, UnknownAction> =>
   async (dispatch, getState) => {
     try {
       dispatch(addCurrentOrderStart());

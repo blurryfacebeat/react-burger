@@ -51,7 +51,7 @@ export const ProfileInput: FC<TProfileInputProps> = ({
             placeholder={placeholder}
             value={value}
             disabled={!isEdit}
-            /* @ts-ignore - здесь ts-ignore по причине ошибки в вашем UI-ките, не моя вина */
+            /* @ts-ignore - здесь ts-ignore по причине ошибки в UI-kit. Без этого я не могу сделать кастомное поле, как по дизайну и по требованиям */
             icon={isEdit ? 'CloseIcon' : 'EditIcon'}
             onChange={(event) => onChange(event.target.value)}
             onIconClick={handleIconClick}

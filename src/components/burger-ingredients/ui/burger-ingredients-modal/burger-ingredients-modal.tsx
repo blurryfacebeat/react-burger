@@ -4,8 +4,7 @@ import classNames from 'classnames';
 import styles from './burger-ingredients-modal.module.scss';
 import { BurgerIngredientsDetails } from '../burger-ingredients-details';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useCustomSelector } from '@/store';
 
 export const BurgerIngredientsModal: FC = () => {
   const params = useParams();
@@ -15,9 +14,9 @@ export const BurgerIngredientsModal: FC = () => {
     navigate(-1);
   };
 
-  const ingredients = useSelector(
-    (state: TRootState) => state.ingredients.ingredients,
-  );
+  const {
+    storeState: { ingredients },
+  } = useCustomSelector<'ingredients'>('ingredients');
 
   const currentIngredient = ingredients.find(
     (item) => item._id === params.ingredientId,

@@ -1,12 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { closeCurrentOrderModal, TAppDispatch, TRootState } from '@/store';
+import {
+  closeCurrentOrderModal,
+  useCustomDispatch,
+  useCustomSelector,
+} from '@/store';
 
 export const useBurgerConstructorModal = () => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const { dispatch } = useCustomDispatch();
 
-  const isModalOpen = useSelector(
-    (state: TRootState) => state.currentOrder.isModalOpen,
-  );
+  const {
+    storeState: { isModalOpen },
+  } = useCustomSelector<'currentOrder'>('currentOrder');
 
   const handleModalClose = () => {
     dispatch(closeCurrentOrderModal());

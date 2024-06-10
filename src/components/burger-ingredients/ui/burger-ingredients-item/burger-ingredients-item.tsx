@@ -5,8 +5,7 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import classNames from 'classnames';
 import { TIngredientItem } from '@/api';
 import { useBurgerIngredientsItemDnd } from './hooks';
-import { useSelector } from 'react-redux';
-import { TRootState } from '@/store';
+import { useCustomSelector } from '@/store';
 import { Link, useLocation } from 'react-router-dom';
 import { ROUTES } from '@/router';
 
@@ -19,14 +18,11 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
 }) => {
   const location = useLocation();
 
-  const ingredients = useSelector(
-    (state: TRootState) =>
-      state.burgerConstructor.burgerConstructor.ingredients,
-  );
-
-  const bun = useSelector(
-    (state: TRootState) => state.burgerConstructor.burgerConstructor.bun,
-  );
+  const {
+    storeState: {
+      burgerConstructor: { ingredients, bun },
+    },
+  } = useCustomSelector<'burgerConstructor'>('burgerConstructor');
 
   const count = useMemo(() => {
     if (item.type === 'bun' && bun?._id === item._id) {
