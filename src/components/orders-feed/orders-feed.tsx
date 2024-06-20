@@ -7,7 +7,7 @@ import { useGetMessagesQueryAllOrders } from '@/store';
 export const OrdersFeed: FC = () => {
   const { data, isLoading } = useGetMessagesQueryAllOrders('default');
 
-  const isContentLoading = isLoading || !(data as unknown as [])?.length;
+  const isContentLoading = isLoading || !data?.length;
   const actualItem = data?.at(-1) || null;
   const total = actualItem?.total || '-';
   const totalToday = actualItem?.totalToday || '-';

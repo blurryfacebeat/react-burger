@@ -7,7 +7,7 @@ import { ROUTES } from '@/router';
 export const OrdersHistory: FC = () => {
   const { data, isLoading } = useGetMessagesQueryUserOrders('default');
 
-  const isContentLoading = isLoading || !(data as unknown as [])?.length;
+  const isContentLoading = isLoading || !data?.length;
   const actualItem = data?.at(-1) || null;
 
   return (
