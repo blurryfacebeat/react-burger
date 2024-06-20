@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding-right: 16px;
+}
+
+.scrollBarContainer {
+  max-height: 600px;
+  width: 100%;
+  max-width: 630px;
+}

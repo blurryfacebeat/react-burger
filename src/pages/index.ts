@@ -7,3 +7,4 @@ export { ResetPasswordPage } from './reset-password-page.tsx';
 export { ProfilePage } from './profile-page.tsx';
 export { OrdersListPage } from './orders-list-page.tsx';
 export { IngredientsDetailsPage } from './ingredients-details-page.tsx';
+export { OrderDetailsPage } from './order-details-page.tsx';

@@ -6,6 +6,7 @@ import {
   IngredientsDetailsPage,
   LoginPage,
   NotFoundPage,
+  OrderDetailsPage,
   OrdersListPage,
   ProfilePage,
   RegisterPage,
@@ -15,6 +16,8 @@ import {
   BurgerIngredientsModal,
   OnlyAuth,
   OnlyUnAuth,
+  OrderDetailsModal,
+  OrdersHistory,
   ProfileInfo,
 } from '@/components';
 
@@ -47,12 +50,17 @@ export const RoutesProvider = () => {
           element={<OnlyAuth component={<ProfilePage />} />}
         >
           <Route index element={<ProfileInfo />} />
-          <Route
-            path={ROUTES.PROFILE_ORDERS}
-            element={<div>История заказов</div>}
-          />
+          <Route path={ROUTES.PROFILE_ORDERS} element={<OrdersHistory />} />
         </Route>
-        <Route path={ROUTES.ORDERS_LIST} element={<OrdersListPage />} />
+        <Route
+          path={`${ROUTES.PROFILE_ORDERS}/:orderNumber`}
+          element={<OnlyAuth component={<OrderDetailsPage />} />}
+        />
+        <Route path={ROUTES.FEED} element={<OrdersListPage />} />
+        <Route
+          path={`${ROUTES.FEED}/:orderNumber`}
+          element={<OrderDetailsPage />}
+        />
         <Route
           path={`${ROUTES.INGREDIENTS}/:ingredientId`}
           element={<IngredientsDetailsPage />}
@@ -64,6 +72,14 @@ export const RoutesProvider = () => {
           <Route
             path={`${ROUTES.INGREDIENTS}/:ingredientId`}
             element={<BurgerIngredientsModal />}
+          />
+          <Route
+            path={`${ROUTES.FEED}/:orderNumber`}
+            element={<OrderDetailsModal />}
+          />
+          <Route
+            path={`${ROUTES.PROFILE_ORDERS}/:orderNumber`}
+            element={<OnlyAuth component={<OrderDetailsModal />} />}
           />
         </Routes>
       )}

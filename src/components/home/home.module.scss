@@ -1,6 +1,6 @@
 .app {
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: var(--max-container-width);
   width: 100%;
   display: flex;
   gap: 40px;
