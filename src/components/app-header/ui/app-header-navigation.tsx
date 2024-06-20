@@ -15,7 +15,7 @@ export const AppHeaderNavigation: FC = () => {
           <NavigationLink to={ROUTES.HOME} Icon={BurgerIcon}>
             Конструктор
           </NavigationLink>
-          <NavigationLink to={ROUTES.ORDERS_LIST} Icon={ListIcon}>
+          <NavigationLink to={ROUTES.FEED} Icon={ListIcon}>
             Лента заказов
           </NavigationLink>
         </li>

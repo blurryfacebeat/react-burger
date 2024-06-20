@@ -52,7 +52,7 @@ export const RoutesProvider = () => {
             element={<div>История заказов</div>}
           />
         </Route>
-        <Route path={ROUTES.ORDERS_LIST} element={<OrdersListPage />} />
+        <Route path={ROUTES.FEED} element={<OrdersListPage />} />
         <Route
           path={`${ROUTES.INGREDIENTS}/:ingredientId`}
           element={<IngredientsDetailsPage />}

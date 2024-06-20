@@ -9,3 +9,5 @@ export * from './api.utils.ts';
 export * from './update-profile.ts';
 export * from './get-profile.ts';
 export * from './logout.ts';
+export * from './get-order.ts';
+export * from './api.types.ts';

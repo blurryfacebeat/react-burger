@@ -9,3 +9,6 @@ export * from './current-order.reducer.ts';
 
 export { default as profileReducer } from './profile.reducer.ts';
 export * from './profile.reducer.ts';
+
+export { default as allOrders } from './all-orders.reducer.ts';
+export * from './all-orders.reducer.ts';
