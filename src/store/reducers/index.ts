@@ -12,3 +12,6 @@ export * from './profile.reducer.ts';
 
 export { default as allOrders } from './all-orders.reducer.ts';
 export * from './all-orders.reducer.ts';
+
+export { default as userOrders } from './user-orders.reducer.ts';
+export * from './user-orders.reducer.ts';

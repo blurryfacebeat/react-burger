@@ -17,6 +17,7 @@ import {
   OnlyAuth,
   OnlyUnAuth,
   OrderDetailsModal,
+  OrdersHistory,
   ProfileInfo,
 } from '@/components';
 
@@ -49,10 +50,7 @@ export const RoutesProvider = () => {
           element={<OnlyAuth component={<ProfilePage />} />}
         >
           <Route index element={<ProfileInfo />} />
-          <Route
-            path={ROUTES.PROFILE_ORDERS}
-            element={<div>История заказов</div>}
-          />
+          <Route path={ROUTES.PROFILE_ORDERS} element={<OrdersHistory />} />
         </Route>
         <Route
           path={`${ROUTES.PROFILE_ORDERS}/:orderNumber`}

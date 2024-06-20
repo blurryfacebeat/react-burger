@@ -1,5 +1,6 @@
 import { createMessageApi } from '../utils';
 import { TOrderItem } from '@/api';
+import { accessTokenLocalStorage } from '@/utils';
 
 type TResponse = {
   success: boolean;
@@ -9,9 +10,9 @@ type TResponse = {
 };
 
 const api = createMessageApi<TResponse>(
-  'wss://norma.nomoreparties.space/orders/all',
-  'allOrders',
+  `wss://norma.nomoreparties.space/orders?token=${accessTokenLocalStorage.get()?.split('Bearer ')[1]}`,
+  'userOrders',
 );
 
-export const { useGetMessagesQuery: useGetMessagesQueryAllOrders } = api;
+export const { useGetMessagesQuery: useGetMessagesQueryUserOrders } = api;
 export default api;

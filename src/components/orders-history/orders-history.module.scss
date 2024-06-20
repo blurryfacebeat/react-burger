@@ -1,0 +1,16 @@
+.container {
+  margin-top: 40px;
+  max-width: 844px;
+  width: 100%;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-right: 24px;
+}
+
+.scrollBarContainer {
+  max-height: 600px;
+}

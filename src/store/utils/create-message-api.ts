@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const createMessageApi = <T>(url: string) => {
+export const createMessageApi = <T>(url: string, id: string) => {
   return createApi({
-    reducerPath: 'api',
+    reducerPath: `api_${id}`,
     baseQuery: fetchBaseQuery({ baseUrl: '/' }),
     endpoints: (build) => ({
       getMessages: build.query<T[], string>({
