@@ -6,6 +6,7 @@ import {
   IngredientsDetailsPage,
   LoginPage,
   NotFoundPage,
+  OrderDetailsPage,
   OrdersListPage,
   ProfilePage,
   RegisterPage,
@@ -15,6 +16,7 @@ import {
   BurgerIngredientsModal,
   OnlyAuth,
   OnlyUnAuth,
+  OrderDetailsModal,
   ProfileInfo,
 } from '@/components';
 
@@ -52,7 +54,15 @@ export const RoutesProvider = () => {
             element={<div>История заказов</div>}
           />
         </Route>
+        <Route
+          path={`${ROUTES.PROFILE_ORDERS}/:orderNumber`}
+          element={<OnlyAuth component={<OrderDetailsPage />} />}
+        />
         <Route path={ROUTES.FEED} element={<OrdersListPage />} />
+        <Route
+          path={`${ROUTES.FEED}/:orderNumber`}
+          element={<OrderDetailsPage />}
+        />
         <Route
           path={`${ROUTES.INGREDIENTS}/:ingredientId`}
           element={<IngredientsDetailsPage />}
@@ -64,6 +74,14 @@ export const RoutesProvider = () => {
           <Route
             path={`${ROUTES.INGREDIENTS}/:ingredientId`}
             element={<BurgerIngredientsModal />}
+          />
+          <Route
+            path={`${ROUTES.FEED}/:orderNumber`}
+            element={<OrderDetailsModal />}
+          />
+          <Route
+            path={`${ROUTES.PROFILE_ORDERS}/:orderNumber`}
+            element={<OnlyAuth component={<OrderDetailsModal />} />}
           />
         </Routes>
       )}

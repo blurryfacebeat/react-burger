@@ -11,11 +11,13 @@ type TModalProps = {
   onClose: () => void;
   title?: string;
   className?: string;
+  withSmallTitle?: boolean;
 };
 
 export const Modal: FC<TModalProps> = ({
   children,
   title,
+  withSmallTitle,
   className,
   onClose,
 }) => {
@@ -48,7 +50,11 @@ export const Modal: FC<TModalProps> = ({
             className={classNames(styles.modal, 'p-10', className)}
           >
             <div className={styles.modalHeader}>
-              {title && <Text textType="large">{title}</Text>}
+              {title && (
+                <Text textType={!withSmallTitle ? 'large' : 'medium'}>
+                  {title}
+                </Text>
+              )}
               <span className={styles.closeIcon}>
                 <CloseIcon onClick={onClose} type="primary" />
               </span>

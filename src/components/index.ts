@@ -22,3 +22,4 @@ export * from './burger-loader';
 export * from './profile-input';
 export * from './orders-feed';
 export * from './order-item';
+export * from './order-details';
