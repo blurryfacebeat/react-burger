@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Loader, MainLayout, Text } from '@/components';
 import styles from './orders-feed.module.scss';
 import { OrdersFeedItems, OrdersFeedSummary } from './ui';
@@ -12,10 +12,6 @@ export const OrdersFeed: FC = () => {
   const total = actualItem?.total || '-';
   const totalToday = actualItem?.totalToday || '-';
 
-  useEffect(() => {
-    console.log(321, data, isLoading);
-  }, [data, isLoading]);
-
   return (
     <MainLayout>
       {isContentLoading ? (
@@ -27,7 +23,11 @@ export const OrdersFeed: FC = () => {
           </Text>
           <div className={styles.innerContainer}>
             <OrdersFeedItems items={actualItem?.orders} />
-            <OrdersFeedSummary total={total} totalToday={totalToday} />
+            <OrdersFeedSummary
+              items={actualItem?.orders}
+              total={total}
+              totalToday={totalToday}
+            />
           </div>
         </div>
       )}

@@ -5,7 +5,7 @@ import './custom-scrollbar.styles.scss';
 
 export const CustomScrollbar: FC<Props> = ({ children, ...otherProps }) => {
   return (
-    <SimpleBar {...otherProps} forceVisible="y" autoHide={false}>
+    <SimpleBar {...otherProps} autoHide={false}>
       {children}
     </SimpleBar>
   );

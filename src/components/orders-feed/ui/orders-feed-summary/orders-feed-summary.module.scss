@@ -7,6 +7,15 @@
 .ordersContainer {
   display: flex;
   gap: 36px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: 700px;
+  scrollbar-width: none;
+}
+
+.ordersTypeTitle {
+  white-space: nowrap;
 }
 
 .ordersItems {
@@ -29,4 +38,15 @@
           0 4px 32px rgba(51, 51, 255, 0.5),
           0 0 8px rgba(51, 51, 255, 0.25),
           0 0 16px rgba(51, 51, 255, 0.25);
+}
+
+.numbersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.numbersColumns {
+  display: flex;
+  gap: 24px;
 }
