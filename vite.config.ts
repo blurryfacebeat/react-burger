@@ -13,5 +13,5 @@ export default defineConfig({
       },
     ],
   },
-  base: '/blurryfacebeat.github.io',
+  base: '/react-burger/',
 });
