@@ -17,7 +17,7 @@ export const OrdersHistory: FC = () => {
       ) : (
         <CustomScrollbar className={styles.scrollBarContainer}>
           <ul className={styles.items}>
-            {actualItem?.orders.map((item) => (
+            {actualItem?.orders?.map((item) => (
               <OrderItem
                 isBig
                 key={item._id}
