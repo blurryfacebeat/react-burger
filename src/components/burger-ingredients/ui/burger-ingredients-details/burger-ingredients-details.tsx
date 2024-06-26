@@ -20,8 +20,14 @@ export const BurgerIngredientsDetails: FC<TBurgerIngredientsDetailsProps> = ({
         <div
           className={classNames(styles.content, asPage && styles.contentAsPage)}
         >
-          <img className="pb-4" src={item.image_large} alt="Ingredient image" />
+          <img
+            data-test-id="ingredient-details-image"
+            className="pb-4"
+            src={item.image_large}
+            alt="Ingredient image"
+          />
           <Text
+            data-test-id="ingredient-details-name"
             className={classNames(styles.itemName, 'pb-8')}
             textType="medium"
           >

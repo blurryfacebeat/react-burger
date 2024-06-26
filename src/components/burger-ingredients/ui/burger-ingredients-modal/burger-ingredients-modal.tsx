@@ -24,6 +24,7 @@ export const BurgerIngredientsModal: FC = () => {
 
   return (
     <Modal
+      data-test-id="ingredient-modal"
       className={classNames(styles.burgerIngredientsModal, 'pb-15')}
       title="Детали ингредиента"
       onClose={handleModalClose}

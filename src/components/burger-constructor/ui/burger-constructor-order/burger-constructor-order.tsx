@@ -13,6 +13,7 @@ export const BurgerConstructorOrder: FC = () => {
   return (
     <div className={classNames(styles.content, 'pt-20')}>
       <Text
+        data-test-id="order-number"
         className={classNames(styles.orderNumber, 'mb-8')}
         textType="digitsLarge"
       >

@@ -57,8 +57,12 @@ export const Modal: FC<TModalProps> = ({
                   {title}
                 </Text>
               )}
-              <span className={styles.closeIcon}>
-                <CloseIcon onClick={onClose} type="primary" />
+              <span
+                data-test-id="close-modal-icon"
+                onClick={onClose}
+                className={styles.closeIcon}
+              >
+                <CloseIcon type="primary" />
               </span>
             </div>
             {children}

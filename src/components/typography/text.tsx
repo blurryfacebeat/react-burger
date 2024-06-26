@@ -22,6 +22,7 @@ export const Text: FC<TTextProps> = ({
   className,
   textType = 'default',
   onClick,
+  ...otherProps
 }) => {
   const getTextTypeClass = () => {
     switch (textType) {
@@ -48,6 +49,7 @@ export const Text: FC<TTextProps> = ({
     <p
       className={classNames('text', getTextTypeClass(), className)}
       onClick={onClick}
+      {...otherProps}
     >
       {children}
     </p>
