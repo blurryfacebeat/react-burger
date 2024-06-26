@@ -5,7 +5,7 @@ export type TOrder = {
   number: number;
 };
 
-type TCurrentOrderState = {
+export type TCurrentOrderState = {
   order: TOrder | null;
   isLoading: boolean;
   isModalOpen: boolean;
