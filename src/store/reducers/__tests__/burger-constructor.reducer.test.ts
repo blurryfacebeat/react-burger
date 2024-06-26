@@ -10,7 +10,7 @@ jest.mock('uuid', () => ({
   v4: () => 'unique-id',
 }));
 
-describe('burgerConstructorSlice', () => {
+describe('burgerConstructorReducer', () => {
   const initialState: TBurgerConstructorState = {
     burgerConstructor: {
       bun: null,

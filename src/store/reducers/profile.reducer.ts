@@ -5,13 +5,13 @@ export type TProfile = {
   email: string;
 };
 
-type TProfileState = {
+export type TProfileState = {
   profile: TProfile | null;
   isAuthChecked: boolean;
   isLoading: boolean;
 };
 
-type TSetProfilePayload = {
+export type TSetProfilePayload = {
   email: string;
   name: string;
 };

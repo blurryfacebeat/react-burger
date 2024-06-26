@@ -6,7 +6,7 @@ import reducer, {
   TCurrentOrderState,
 } from '../current-order.reducer.ts';
 
-describe('currentOrderSlice', () => {
+describe('currentOrderReducer', () => {
   const initialState: TCurrentOrderState = {
     order: null,
     isLoading: false,
