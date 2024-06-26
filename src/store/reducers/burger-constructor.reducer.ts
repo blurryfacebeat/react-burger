@@ -11,7 +11,7 @@ export type TBurgerConstructor = {
   ingredients: TBurgerConstructorIngredientItem[];
 };
 
-type TBurgerConstructorState = {
+export type TBurgerConstructorState = {
   burgerConstructor: TBurgerConstructor;
 };
 
