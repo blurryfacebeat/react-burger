@@ -38,6 +38,7 @@ export const BurgerConstructorTotal: FC<TBurgerConstructorTotalProps> = ({
         <Text textType="digitsMedium">{value}</Text>
       </div>
       <Button
+        data-test-id="create-order-button"
         disabled={isButtonDisabled}
         type="primary"
         size="large"

@@ -20,6 +20,7 @@ export const Modal: FC<TModalProps> = ({
   withSmallTitle,
   className,
   onClose,
+  ...otherProps
 }) => {
   const handleKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -48,6 +49,7 @@ export const Modal: FC<TModalProps> = ({
           <div
             onClick={handleModalClick}
             className={classNames(styles.modal, 'p-10', className)}
+            {...otherProps}
           >
             <div className={styles.modalHeader}>
               {title && (

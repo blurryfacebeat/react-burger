@@ -32,6 +32,7 @@ export const BurgerConstructorItem: FC<TBurgerConstructorItemProps> = ({
   isDraggable,
   className,
   onMoveCard,
+  ...otherProps
 }) => {
   const { dispatch } = useCustomDispatch();
 
@@ -55,6 +56,7 @@ export const BurgerConstructorItem: FC<TBurgerConstructorItemProps> = ({
         isDragging && styles.nullableOpacity,
         isDraggable && styles.draggable,
       )}
+      {...otherProps}
     >
       <span className={classNames(!isDraggable && styles.hiddenDragIcon)}>
         <DragIcon type="primary" />

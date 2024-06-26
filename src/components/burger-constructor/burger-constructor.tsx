@@ -39,6 +39,7 @@ export const BurgerConstructor: FC = () => {
   return (
     <div className={classNames(styles.burgerConstructor, 'mt-25 pl-4')}>
       <div
+        data-test-id="ingredients-drop-zone"
         ref={drop}
         className={classNames(
           styles.dropContainer,
@@ -49,6 +50,7 @@ export const BurgerConstructor: FC = () => {
           <>
             {!!bun && (
               <BurgerConstructorItem
+                data-test-id="burger-constructor-bun-top"
                 text={`${bun.name} (верх)`}
                 thumbnail={bun.image}
                 price={bun.price}
@@ -63,6 +65,7 @@ export const BurgerConstructor: FC = () => {
                 <ul className={styles.burgerConstructorContainer}>
                   {ingredients.map((item, idx) => (
                     <BurgerConstructorItem
+                      data-test-id="burger-constructor-main"
                       key={item.key}
                       text={item.name}
                       thumbnail={item.image}
@@ -78,6 +81,7 @@ export const BurgerConstructor: FC = () => {
             )}
             {!!bun && (
               <BurgerConstructorItem
+                data-test-id="burger-constructor-bun-bottom"
                 text={`${bun.name} (низ)`}
                 thumbnail={bun.image}
                 price={bun.price}
@@ -95,6 +99,7 @@ export const BurgerConstructor: FC = () => {
       <BurgerConstructorTotal value={total} onClick={createOrder} />
       {isModalOpen && (
         <Modal
+          data-test-id="order-modal"
           className={classNames(styles.burgerConstructorModal, 'pt-15 pb-30')}
           onClose={handleModalClose}
         >
