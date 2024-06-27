@@ -27,17 +27,21 @@ export const Login: FC = () => {
         </Text>
         <div className={classNames(styles.fields, 'mb-6')}>
           <EmailInput
+            data-test-id="login-email-field"
             placeholder="E-mail"
             value={email}
             onChange={handleChangeEmail}
           />
           <PasswordInput
+            data-test-id="login-password-field"
             placeholder="Пароль"
             value={password}
             onChange={handleChangePassword}
           />
         </div>
-        <Button htmlType="submit">Войти</Button>
+        <Button data-test-id="login-button" htmlType="submit">
+          Войти
+        </Button>
         <div className={classNames(styles.subtextContainer, 'mt-20')}>
           <div className={styles.subtext}>
             <Text textType="inactiveColor">Вы — новый пользователь?</Text>

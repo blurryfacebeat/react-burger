@@ -1,13 +1,13 @@
 import { TIngredientItem } from '@/api';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type TIngredientsState = {
+export type TIngredientsState = {
   ingredients: TIngredientItem[];
   isLoading: boolean;
   errorMessage: string | null;
 };
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   ingredients: [],
   isLoading: true,
   errorMessage: null,

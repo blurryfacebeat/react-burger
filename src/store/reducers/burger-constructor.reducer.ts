@@ -11,7 +11,7 @@ export type TBurgerConstructor = {
   ingredients: TBurgerConstructorIngredientItem[];
 };
 
-type TBurgerConstructorState = {
+export type TBurgerConstructorState = {
   burgerConstructor: TBurgerConstructor;
 };
 
@@ -20,7 +20,7 @@ type TSwipeIngredientsInBurgerConstructorPayload = {
   fromIndex: number;
 };
 
-const initialState: TBurgerConstructorState = {
+export const initialState: TBurgerConstructorState = {
   burgerConstructor: {
     bun: null,
     ingredients: [],

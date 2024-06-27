@@ -20,6 +20,7 @@ export const Modal: FC<TModalProps> = ({
   withSmallTitle,
   className,
   onClose,
+  ...otherProps
 }) => {
   const handleKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -48,6 +49,7 @@ export const Modal: FC<TModalProps> = ({
           <div
             onClick={handleModalClick}
             className={classNames(styles.modal, 'p-10', className)}
+            {...otherProps}
           >
             <div className={styles.modalHeader}>
               {title && (
@@ -55,8 +57,12 @@ export const Modal: FC<TModalProps> = ({
                   {title}
                 </Text>
               )}
-              <span className={styles.closeIcon}>
-                <CloseIcon onClick={onClose} type="primary" />
+              <span
+                data-test-id="close-modal-icon"
+                onClick={onClose}
+                className={styles.closeIcon}
+              >
+                <CloseIcon type="primary" />
               </span>
             </div>
             {children}

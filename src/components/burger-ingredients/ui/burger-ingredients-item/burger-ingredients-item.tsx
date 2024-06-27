@@ -37,6 +37,7 @@ export const BurgerIngredientsItem: FC<TBurgerIngredientsItemProps> = ({
 
   return (
     <li
+      data-test-id={`ingredient_${item.type}`}
       className={classNames(isDragging && styles.burgerIngredientsItemAnimated)}
       ref={drag}
     >

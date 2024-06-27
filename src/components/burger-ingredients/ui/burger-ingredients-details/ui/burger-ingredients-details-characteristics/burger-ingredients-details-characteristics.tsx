@@ -12,19 +12,22 @@ export const BurgerIngredientsDetailsCharacteristics: FC<
 > = ({ item }) => {
   return (
     <ul className={styles.itemCharacteristics}>
-      <li className={styles.item}>
+      <li data-test-id="ingredient-details-calories" className={styles.item}>
         <Text textType="inactiveColor">Калории, ккал</Text>
         <Text textType="inactiveColor">{item.calories}</Text>
       </li>
-      <li className={styles.item}>
+      <li data-test-id="ingredient-details-proteins" className={styles.item}>
         <Text textType="inactiveColor">Белки, г</Text>
         <Text textType="inactiveColor">{item.proteins}</Text>
       </li>
-      <li className={styles.item}>
+      <li data-test-id="ingredient-details-fat" className={styles.item}>
         <Text textType="inactiveColor">Жиры, г</Text>
         <Text textType="inactiveColor">{item.fat}</Text>
       </li>
-      <li className={styles.item}>
+      <li
+        data-test-id="ingredient-details-carbohydrates"
+        className={styles.item}
+      >
         <Text textType="inactiveColor">Углеводы, г</Text>
         <Text textType="inactiveColor">{item.carbohydrates}</Text>
       </li>

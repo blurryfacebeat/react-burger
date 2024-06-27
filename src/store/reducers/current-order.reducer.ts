@@ -5,7 +5,7 @@ export type TOrder = {
   number: number;
 };
 
-type TCurrentOrderState = {
+export type TCurrentOrderState = {
   order: TOrder | null;
   isLoading: boolean;
   isModalOpen: boolean;
@@ -16,7 +16,7 @@ type TAddCurrentOrderPayload = {
   number: number;
 };
 
-const initialState: TCurrentOrderState = {
+export const initialState: TCurrentOrderState = {
   order: null,
   isLoading: false,
   isModalOpen: false,
