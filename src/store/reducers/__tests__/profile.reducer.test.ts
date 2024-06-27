@@ -4,15 +4,10 @@ import reducer, {
   setProfileIsLoading,
   TProfileState,
   TSetProfilePayload,
+  initialState,
 } from '../profile.reducer.ts';
 
 describe('profileReducer', () => {
-  const initialState: TProfileState = {
-    profile: null,
-    isAuthChecked: false,
-    isLoading: false,
-  };
-
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: '' })).toEqual(initialState);
   });

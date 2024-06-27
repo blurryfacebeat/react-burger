@@ -3,40 +3,22 @@ import reducer, {
   removeIngredientFromConstructor,
   swipeIngredientsInBurgerConstructor,
   TBurgerConstructorState,
+  initialState,
 } from '../burger-constructor.reducer.ts';
 import { TIngredientItem } from '@/api';
+import { createIngredientItem } from '../helpers/reducers-tests.helpers.ts';
 
 jest.mock('uuid', () => ({
   v4: () => 'unique-id',
 }));
 
 describe('burgerConstructorReducer', () => {
-  const initialState: TBurgerConstructorState = {
-    burgerConstructor: {
-      bun: null,
-      ingredients: [],
-    },
-  };
-
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: '' })).toEqual(initialState);
   });
 
   it('should handle addIngredientToConstructor for bun', () => {
-    const bun: TIngredientItem = {
-      _id: '1',
-      name: 'Bun',
-      type: 'bun',
-      proteins: 10,
-      fat: 20,
-      carbohydrates: 30,
-      calories: 40,
-      price: 50,
-      image: 'image_url',
-      image_mobile: 'image_mobile_url',
-      image_large: 'image_large_url',
-      __v: 0,
-    };
+    const bun: TIngredientItem = createIngredientItem({ type: 'bun' });
 
     const action = addIngredientToConstructor(bun);
     const expectedState: TBurgerConstructorState = {
@@ -50,20 +32,7 @@ describe('burgerConstructorReducer', () => {
   });
 
   it('should handle addIngredientToConstructor for ingredient', () => {
-    const ingredient: TIngredientItem = {
-      _id: '2',
-      name: 'Ingredient',
-      type: 'main',
-      proteins: 10,
-      fat: 20,
-      carbohydrates: 30,
-      calories: 40,
-      price: 50,
-      image: 'image_url',
-      image_mobile: 'image_mobile_url',
-      image_large: 'image_large_url',
-      __v: 0,
-    };
+    const ingredient: TIngredientItem = createIngredientItem({ id: '2' });
 
     const action = addIngredientToConstructor(ingredient);
     const expectedState: TBurgerConstructorState = {
@@ -87,18 +56,7 @@ describe('burgerConstructorReducer', () => {
         bun: null,
         ingredients: [
           {
-            _id: '2',
-            name: 'Ingredient',
-            type: 'main',
-            proteins: 10,
-            fat: 20,
-            carbohydrates: 30,
-            calories: 40,
-            price: 50,
-            image: 'image_url',
-            image_mobile: 'image_mobile_url',
-            image_large: 'image_large_url',
-            __v: 0,
+            ...createIngredientItem({ id: '2' }),
             key: 'unique-id',
           },
         ],
@@ -122,33 +80,11 @@ describe('burgerConstructorReducer', () => {
         bun: null,
         ingredients: [
           {
-            _id: '1',
-            name: 'Ingredient 1',
-            type: 'main',
-            proteins: 10,
-            fat: 20,
-            carbohydrates: 30,
-            calories: 40,
-            price: 50,
-            image: 'image_url',
-            image_mobile: 'image_mobile_url',
-            image_large: 'image_large_url',
-            __v: 0,
+            ...createIngredientItem(),
             key: 'unique-id-1',
           },
           {
-            _id: '2',
-            name: 'Ingredient 2',
-            type: 'main',
-            proteins: 10,
-            fat: 20,
-            carbohydrates: 30,
-            calories: 40,
-            price: 50,
-            image: 'image_url',
-            image_mobile: 'image_mobile_url',
-            image_large: 'image_large_url',
-            __v: 0,
+            ...createIngredientItem({ id: '2' }),
             key: 'unique-id-2',
           },
         ],
@@ -165,33 +101,11 @@ describe('burgerConstructorReducer', () => {
         bun: null,
         ingredients: [
           {
-            _id: '2',
-            name: 'Ingredient 2',
-            type: 'main',
-            proteins: 10,
-            fat: 20,
-            carbohydrates: 30,
-            calories: 40,
-            price: 50,
-            image: 'image_url',
-            image_mobile: 'image_mobile_url',
-            image_large: 'image_large_url',
-            __v: 0,
+            ...createIngredientItem({ id: '2' }),
             key: 'unique-id-2',
           },
           {
-            _id: '1',
-            name: 'Ingredient 1',
-            type: 'main',
-            proteins: 10,
-            fat: 20,
-            carbohydrates: 30,
-            calories: 40,
-            price: 50,
-            image: 'image_url',
-            image_mobile: 'image_mobile_url',
-            image_large: 'image_large_url',
-            __v: 0,
+            ...createIngredientItem(),
             key: 'unique-id-1',
           },
         ],

@@ -12,4 +12,4 @@ https://blurryfacebeat.github.io/react-burger/
 > ## Команды для запуска тестов:
 > npm run test
 >
-> npx cypress open
+> npm run cypress

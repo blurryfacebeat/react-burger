@@ -16,7 +16,7 @@ export type TSetProfilePayload = {
   name: string;
 };
 
-const initialState: TProfileState = {
+export const initialState: TProfileState = {
   profile: null,
   isAuthChecked: false,
   isLoading: false,

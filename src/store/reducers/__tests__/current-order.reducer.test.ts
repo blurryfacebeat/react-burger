@@ -4,15 +4,10 @@ import reducer, {
   addCurrentOrderFailure,
   closeCurrentOrderModal,
   TCurrentOrderState,
+  initialState,
 } from '../current-order.reducer.ts';
 
 describe('currentOrderReducer', () => {
-  const initialState: TCurrentOrderState = {
-    order: null,
-    isLoading: false,
-    isModalOpen: false,
-  };
-
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: '' })).toEqual(initialState);
   });

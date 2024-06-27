@@ -3,16 +3,12 @@ import reducer, {
   fetchIngredientsSuccess,
   fetchIngredientsFailure,
   TIngredientsState,
+  initialState,
 } from '../ingredients.reducer.ts';
 import { TIngredientItem } from '@/api';
+import { createIngredientItem } from '../helpers/reducers-tests.helpers.ts';
 
 describe('ingredientsReducer', () => {
-  const initialState: TIngredientsState = {
-    ingredients: [],
-    isLoading: true,
-    errorMessage: null,
-  };
-
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: '' })).toEqual(initialState);
   });
@@ -31,34 +27,8 @@ describe('ingredientsReducer', () => {
 
   it('should handle fetchIngredientsSuccess', () => {
     const ingredients: TIngredientItem[] = [
-      {
-        _id: '1',
-        name: 'Ingredient 1',
-        type: 'main',
-        proteins: 10,
-        fat: 20,
-        carbohydrates: 30,
-        calories: 40,
-        price: 50,
-        image: 'image_url',
-        image_mobile: 'image_mobile_url',
-        image_large: 'image_large_url',
-        __v: 0,
-      },
-      {
-        _id: '2',
-        name: 'Ingredient 2',
-        type: 'main',
-        proteins: 15,
-        fat: 25,
-        carbohydrates: 35,
-        calories: 45,
-        price: 55,
-        image: 'image_url',
-        image_mobile: 'image_mobile_url',
-        image_large: 'image_large_url',
-        __v: 0,
-      },
+      createIngredientItem(),
+      createIngredientItem({ id: '2' }),
     ];
     const action = fetchIngredientsSuccess(ingredients);
     const expectedState: TIngredientsState = {

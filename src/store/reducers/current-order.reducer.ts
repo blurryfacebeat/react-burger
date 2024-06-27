@@ -16,7 +16,7 @@ type TAddCurrentOrderPayload = {
   number: number;
 };
 
-const initialState: TCurrentOrderState = {
+export const initialState: TCurrentOrderState = {
   order: null,
   isLoading: false,
   isModalOpen: false,
